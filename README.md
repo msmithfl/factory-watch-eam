@@ -2,20 +2,6 @@
 
 A modern web-based Enterprise Asset Management (EAM) solution for tracking equipment maintenance, work orders, and asset lifecycle management. Built with ASP.NET Core and React to demonstrate full-stack development capabilities for asset-intensive operations.
 
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [API Documentation](#api-documentation)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## ✨ Features
 
 ### Core Functionality

@@ -23,6 +23,13 @@ function App() {
     location: '',
     status: '0'
   })
+  const [showCreateForm, setShowCreateForm] = useState(false)
+  const [createForm, setCreateForm] = useState({
+    name: '',
+    location: '',
+    status: '0',
+    description: ''
+  })
 
   // Fetch equipment when component mounts
   useEffect(() => {
@@ -60,6 +67,45 @@ function App() {
   const cancelEdit = () => {
     setEditingId(null)
     setEditForm({ name: '', location: '', status: '0' })
+  }
+
+  // Create new equipment
+  const createEquipment = async () => {
+    try {
+      const response = await fetch('http://localhost:5141/equipment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: createForm.name,
+          location: createForm.location,
+          status: parseInt(createForm.status),
+          description: createForm.description || null
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const newItem = await response.json()
+      
+      // Add to local state
+      setEquipment(prevEquipment => [...prevEquipment, newItem])
+
+      // Clear form and hide
+      setCreateForm({ name: '', location: '', status: '0', description: '' })
+      setShowCreateForm(false)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create equipment')
+    }
+  }
+
+  // Cancel create
+  const cancelCreate = () => {
+    setShowCreateForm(false)
+    setCreateForm({ name: '', location: '', status: '0', description: '' })
   }
 
   // Update equipment
@@ -129,6 +175,129 @@ function App() {
   return (
     <>
       <h1>FactoryWatch - Equipment List</h1>
+      
+      {/* Create Equipment Button/Form */}
+      <div style={{ marginBottom: '20px' }}>
+        {!showCreateForm ? (
+          <button
+            onClick={() => setShowCreateForm(true)}
+            style={{
+              backgroundColor: '#28a745',
+              color: 'white',
+              border: 'none',
+              padding: '10px 20px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '14px',
+              fontWeight: 'bold'
+            }}
+          >
+            + Add New Equipment
+          </button>
+        ) : (
+          <div style={{
+            padding: '15px',
+            border: '2px solid #28a745',
+            borderRadius: '8px',
+            backgroundColor: '#f8fff9'
+          }}>
+            <h3 style={{ margin: '0 0 15px 0', color: '#28a745' }}>Add New Equipment</h3>
+            <div style={{ 
+              display: 'flex', 
+              gap: '10px', 
+              marginBottom: '15px',
+              flexWrap: 'wrap'
+            }}>
+              <input
+                type="text"
+                placeholder="Equipment Name"
+                value={createForm.name}
+                onChange={(e) => setCreateForm(prev => ({ ...prev, name: e.target.value }))}
+                style={{
+                  padding: '8px 12px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  fontSize: '14px',
+                  minWidth: '150px'
+                }}
+              />
+              <input
+                type="text"
+                placeholder="Location"
+                value={createForm.location}
+                onChange={(e) => setCreateForm(prev => ({ ...prev, location: e.target.value }))}
+                style={{
+                  padding: '8px 12px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  fontSize: '14px',
+                  minWidth: '150px'
+                }}
+              />
+              <select
+                value={createForm.status}
+                onChange={(e) => setCreateForm(prev => ({ ...prev, status: e.target.value }))}
+                style={{
+                  padding: '8px 12px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  fontSize: '14px',
+                  minWidth: '120px'
+                }}
+              >
+                <option value="0">Operational</option>
+                <option value="1">Under Maintenance</option>
+                <option value="2">Out of Service</option>
+                <option value="3">Decommissioned</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Description (optional)"
+                value={createForm.description}
+                onChange={(e) => setCreateForm(prev => ({ ...prev, description: e.target.value }))}
+                style={{
+                  padding: '8px 12px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                  fontSize: '14px',
+                  minWidth: '200px'
+                }}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                onClick={createEquipment}
+                disabled={!createForm.name || !createForm.location}
+                style={{
+                  backgroundColor: createForm.name && createForm.location ? '#28a745' : '#ccc',
+                  color: 'white',
+                  border: 'none',
+                  padding: '8px 16px',
+                  borderRadius: '4px',
+                  cursor: createForm.name && createForm.location ? 'pointer' : 'not-allowed',
+                  fontSize: '14px'
+                }}
+              >
+                Create Equipment
+              </button>
+              <button
+                onClick={cancelCreate}
+                style={{
+                  backgroundColor: '#6c757d',
+                  color: 'white',
+                  border: 'none',
+                  padding: '8px 16px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
       
       {equipment.length === 0 ? (
         <p>No equipment found</p>

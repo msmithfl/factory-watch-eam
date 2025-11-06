@@ -51,7 +51,7 @@ A modern web-based Enterprise Asset Management (EAM) solution for tracking equip
 
 Before you begin, ensure you have the following installed:
 
-- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) or later
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/download) or later
 - [Node.js](https://nodejs.org/) (v18.x or later) and npm
 - [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) or SQL Server LocalDB
 - [Git](https://git-scm.com/)

@@ -69,7 +69,7 @@ public static class EquipmentEndpoints
             {
                 Name = createDto.Name,
                 Location = createDto.Location,
-                Status = EquipmentStatus.Operational,
+                Status = createDto.Status,
                 LastMaintenanceDate = DateOnly.FromDateTime(DateTime.Now),
                 Description = createDto.Description,
                 CreatedAt = DateTime.UtcNow,

@@ -1,4 +1,50 @@
 GET http://localhost:5141/equipment
 
 ###
-GET http://localhost:5141/equipment/2
+GET http://localhost:5141/equipment/1
+
+###
+POST http://localhost:5141/equipment/
+Content-Type: application/json
+
+{
+    "name": "Mechanical Switch D4",
+    "location": "Assembly Line 1",
+    "status": "Operational",
+    "description": "Single button press switch mechanism"
+}
+
+###
+PUT http://localhost:5141/equipment/1
+Content-Type: application/json
+
+{
+    "name": "Updated Conveyor Belt",
+    "location": "Assembly Line 1 - Updated",
+    "status": 1,
+    "nextMaintenanceDate": "2025-01-15",
+    "description": "Updated description"
+}
+
+###
+DELETE http://localhost:5141/equipment/1
+
+
+### Create new equipment
+POST http://localhost:5141/equipment
+Content-Type: application/json
+
+{
+    "name": "Test Equipment",
+    "location": "Test Location",
+    "description": "For testing DELETE"
+}
+
+### Get all equipment (note the new ID)
+GET http://localhost:5141/equipment
+
+### Delete the new equipment (use the ID from the response above)
+DELETE http://localhost:5141/equipment/4
+
+### Verify deletion - should return 404
+GET http://localhost:5141/equipment/4

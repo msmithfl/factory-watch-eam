@@ -23,9 +23,9 @@ A modern web-based Enterprise Asset Management (EAM) solution for tracking equip
 ## 🛠️ Tech Stack
 
 ### Backend
-- **Framework**: ASP.NET Core 8.0 Web API
-- **Language**: C# 12
-- **ORM**: Entity Framework Core 8.0
+- **Framework**: ASP.NET Core 9.0 Web API
+- **Language**: C# 13
+- **ORM**: Entity Framework Core 9.0
 - **Database**: SQL Server Express 2022
 - **Testing**: xUnit, Moq, FluentAssertions
 - **API Documentation**: Swagger/OpenAPI
@@ -51,7 +51,7 @@ A modern web-based Enterprise Asset Management (EAM) solution for tracking equip
 
 Before you begin, ensure you have the following installed:
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download) or later
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/download) or later
 - [Node.js](https://nodejs.org/) (v18.x or later) and npm
 - [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) or SQL Server LocalDB
 - [Git](https://git-scm.com/)

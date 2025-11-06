@@ -142,7 +142,7 @@ public static class EquipmentEndpoints
             dbContext.EquipmentList.Remove(equipment);
             await dbContext.SaveChangesAsync();
 
-            return Results.NoContent();  // 204 No Content - successful deletion
+            return Results.NoContent();
         })
         .WithName("DeleteEquipment")
         .WithSummary("Delete equipment")

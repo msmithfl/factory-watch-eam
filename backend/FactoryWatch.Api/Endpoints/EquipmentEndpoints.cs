@@ -40,14 +40,61 @@ public static class EquipmentEndpoints
         // GET /equipment/{id}
         group.MapGet("/{id}", async (int id, FactoryWatchContext dbContext) =>
         {
-            Equipment? equipment = await dbContext.EquipmentList.FindAsync(id);
-            return equipment is null ? Results.NotFound() : Results.Ok(equipment);
+            var equipment = await dbContext.EquipmentList.FindAsync(id);
+            if (equipment is null) return Results.NotFound();
+
+            var response = new EquipmentResponseDto(
+                equipment.Id,
+                equipment.Name,
+                equipment.Location,
+                equipment.Status.ToString(),
+                equipment.LastMaintenanceDate,
+                equipment.NextMaintenanceDate,
+                equipment.Description,
+                equipment.CreatedAt
+            );
+
+            return Results.Ok(response);
         })
         .WithName(GetEquipmentEndpointName)
         .WithSummary("Get equipment by ID")
         .WithDescription("Returns specific equipment by its ID")
         .Produces<Equipment>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status404NotFound);
+
+        // POST /equipment - Accept DTO, return DTO
+        group.MapPost("/", async (CreateEquipmentDto createDto, FactoryWatchContext dbContext) =>
+        {
+            var equipment = new Equipment
+            {
+                Name = createDto.Name,
+                Location = createDto.Location,
+                Status = EquipmentStatus.Operational,
+                LastMaintenanceDate = DateOnly.FromDateTime(DateTime.Now),
+                Description = createDto.Description,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            dbContext.EquipmentList.Add(equipment);
+            await dbContext.SaveChangesAsync();
+
+            var response = new EquipmentResponseDto(
+                equipment.Id,
+                equipment.Name,
+                equipment.Location,
+                equipment.Status.ToString(),
+                equipment.LastMaintenanceDate,
+                equipment.NextMaintenanceDate,
+                equipment.Description,
+                equipment.CreatedAt
+            );
+
+            return Results.Created($"/equipment/{equipment.Id}", response);
+        })
+        .WithSummary("Create new equipment")
+        .Accepts<CreateEquipmentDto>("application/json")
+        .Produces<EquipmentResponseDto>(StatusCodes.Status201Created);
 
         return group;
     }

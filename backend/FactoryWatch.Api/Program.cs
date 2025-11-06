@@ -10,7 +10,21 @@ builder.Services.AddSqlite<FactoryWatchContext>(connString);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 🎯 ADD CORS SUPPORT
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173", "https://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
+
+// 🎯 USE CORS
+app.UseCors("AllowReactApp");
 
 // ADD SWAGGER MIDDLEWARE (Development only) - serve Swagger tools
 if (app.Environment.IsDevelopment())

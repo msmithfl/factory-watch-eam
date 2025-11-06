@@ -40,6 +40,31 @@ function App() {
     fetchEquipment()
   }, [])
 
+  // DELETE equipment function
+  const deleteEquipment = async (id: number, name: string) => {
+    // Confirm before deleting
+    if (!confirm(`Are you sure you want to delete "${name}"?`)) {
+      return
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5141/equipment/${id}`, {
+        method: 'DELETE'
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      // Remove from local state (optimistic update)
+      setEquipment(prevEquipment => 
+        prevEquipment.filter(item => item.id !== id)
+      )
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete equipment')
+    }
+  }
+
   if (loading) return <div>Loading equipment...</div>
   if (error) return <div>Error: {error}</div>
 
@@ -54,11 +79,37 @@ function App() {
           <h2>Equipment ({equipment.length} items)</h2>
           <ul>
             {equipment.map((item) => (
-              <li key={item.id}>
-                <strong>{item.name}</strong> - {item.location} 
-                <span style={{ color: getStatusColor(item.status) }}>
-                  ({item.status})
-                </span>
+              <li key={item.id} style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                marginBottom: '10px',
+                padding: '8px',
+                border: '1px solid #ddd',
+                borderRadius: '4px'
+              }}>
+                <div>
+                  <strong>{item.name}</strong> - {item.location} 
+                  <span style={{ color: getStatusColor(item.status) }}>
+                    ({item.status})
+                  </span>
+                </div>
+                <button 
+                  onClick={() => deleteEquipment(item.id, item.name)}
+                  style={{
+                    backgroundColor: '#dc3545',
+                    color: 'white',
+                    border: 'none',
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#c82333'}
+                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#dc3545'}
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>

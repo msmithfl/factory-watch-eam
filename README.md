@@ -31,11 +31,11 @@ A modern web-based Enterprise Asset Management (EAM) solution for tracking equip
 - **API Documentation**: Swagger/OpenAPI
 
 ### Frontend
-- **Framework**: React 18.2
+- **Framework**: React 19
 - **Language**: JavaScript (ES6+) / TypeScript
 - **State Management**: Redux Toolkit
-- **Routing**: React Router v6
-- **UI Components**: Material-UI (MUI) v5
+- **Routing**: React Router v7
+- **UI Components**: Material-UI (MUI) v7
 - **Charts**: Recharts
 - **HTTP Client**: Axios
 - **Testing**: Jest, React Testing Library
@@ -367,10 +367,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
-- Portfolio: [yourportfolio.com](https://yourportfolio.com)
+**Matt Smith**
+- GitHub: [@msmithfl](https://github.com/msmithfl)
+- LinkedIn: [Matthew Smith](https://www.linkedin.com/in/matthew-smith-41ba39156/)
+- Portfolio: [mattsmith.digital](https://mattsmith.digital/)
 
 ## 🙏 Acknowledgments
 

@@ -35,7 +35,7 @@ public static class EquipmentEndpoints
             .WithName("GetAllEquipment")
             .WithSummary("Get all equipment")
             .WithDescription("Returns a list of all factory equipment")
-            .Produces<List<Equipment>>(StatusCodes.Status200OK);
+            .Produces<List<EquipmentResponseDto>>(StatusCodes.Status200OK);
 
         // GET /equipment/{id}
         group.MapGet("/{id}", async (int id, FactoryWatchContext dbContext) =>
@@ -59,7 +59,7 @@ public static class EquipmentEndpoints
         .WithName(GetEquipmentEndpointName)
         .WithSummary("Get equipment by ID")
         .WithDescription("Returns specific equipment by its ID")
-        .Produces<Equipment>(StatusCodes.Status200OK)
+        .Produces<EquipmentResponseDto>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status404NotFound);
 
         // POST /equipment - Accept DTO, return DTO
@@ -95,6 +95,60 @@ public static class EquipmentEndpoints
         .WithSummary("Create new equipment")
         .Accepts<CreateEquipmentDto>("application/json")
         .Produces<EquipmentResponseDto>(StatusCodes.Status201Created);
+
+        // PUT /equipment/{id}
+        group.MapPut("/{id}", async (int id, UpdateEquipmentDto updateDto, FactoryWatchContext dbContext) =>
+        {
+            var equipment = await dbContext.EquipmentList.FindAsync(id);
+            if (equipment is null) return Results.NotFound();
+
+            // Update the equipment properties
+            equipment.Name = updateDto.Name;
+            equipment.Location = updateDto.Location;
+            equipment.Status = updateDto.Status;
+            equipment.NextMaintenanceDate = updateDto.NextMaintenanceDate;
+            equipment.Description = updateDto.Description;
+            equipment.UpdatedAt = DateTime.UtcNow;  // Update timestamp
+
+            await dbContext.SaveChangesAsync();
+
+            // Return updated equipment as DTO
+            var response = new EquipmentResponseDto(
+                equipment.Id,
+                equipment.Name,
+                equipment.Location,
+                equipment.Status.ToString(),
+                equipment.LastMaintenanceDate,
+                equipment.NextMaintenanceDate,
+                equipment.Description,
+                equipment.CreatedAt
+            );
+
+            return Results.Ok(response);
+        })
+        .WithName("UpdateEquipment")
+        .WithSummary("Update equipment")
+        .WithDescription("Updates an existing equipment item")
+        .Accepts<UpdateEquipmentDto>("application/json")
+        .Produces<EquipmentResponseDto>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status404NotFound);
+
+        // DELETE /equipment/{id}
+        group.MapDelete("/{id}", async (int id, FactoryWatchContext dbContext) =>
+        {
+            var equipment = await dbContext.EquipmentList.FindAsync(id);
+            if (equipment is null) return Results.NotFound();
+
+            dbContext.EquipmentList.Remove(equipment);
+            await dbContext.SaveChangesAsync();
+
+            return Results.NoContent();  // 204 No Content - successful deletion
+        })
+        .WithName("DeleteEquipment")
+        .WithSummary("Delete equipment")
+        .WithDescription("Deletes an equipment item by ID")
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status404NotFound);
 
         return group;
     }

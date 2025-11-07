@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import Header from './components/Header'
 
 // TypeScript interface matching your EquipmentResponseDto
 interface Equipment {
@@ -174,7 +175,9 @@ function App() {
 
   return (
     <>
-      <h1>FactoryWatch - Equipment List</h1>
+      <Header />
+      <div style={{ padding: '0 2rem', maxWidth: '1200px', margin: '0 auto' }}>
+        <h1>Equipment Management</h1>
       
       {/* Create Equipment Button/Form */}
       <div style={{ marginBottom: '20px' }}>
@@ -450,6 +453,7 @@ function App() {
           </ul>
         </div>
       )}
+      </div>
     </>
   )
 }

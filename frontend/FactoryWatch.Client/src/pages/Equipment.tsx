@@ -172,7 +172,7 @@ function Equipment() {
   if (error) return <div>Error: {error}</div>
 
   return (
-    <div style={{ padding: '0 2rem', maxWidth: '1200px', margin: '0 auto' }}>
+    <div>
       <h1>Equipment Management</h1>
     
       {/* Create Equipment Button/Form */}
@@ -405,7 +405,7 @@ function Equipment() {
                     alignItems: 'center'
                   }}>
                     <div>
-                      <span style={{ color: 'black' }}>
+                      <span style={{ color: 'black', paddingRight: '5px' }}>
                         <strong>{item.name}</strong> - {item.location}
                       </span>
                       <span style={{ color: getStatusColor(item.status) }}>

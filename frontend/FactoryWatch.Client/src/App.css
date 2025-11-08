@@ -1,1 +1,108 @@
+#root {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
 
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.asimovian-regular {
+  font-family: "Asimovian", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.tasa-explorer-regular {
+  font-family: "TASA Explorer", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header-bar {
+  background-color: #2790f2;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.header-title a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.header-title h1 {
+  margin: 1rem;
+  color: white;
+}
+
+.page-content h2, .page-content p {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.page-content p {
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.highlighted-link {
+  color:#2790f2
+}
+
+.highlighted-link a:hover {
+  text-decoration: none;
+}
+
+.sidebar {
+  width: 220px;
+  background: #f4f4f4;
+  padding: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 0.5rem 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.sidebar .sub-list {
+  padding-left: 1rem;
+  font-size: 0.9rem;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.no-margin {
+  margin: 0 !important;
+  padding: 0 !important;
+}

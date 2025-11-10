@@ -1,4 +1,5 @@
-GET http://localhost:5141/equipment
+### Test equipment endpoint
+GET https://app-factorywatch-be-dev-westus2-03.azurewebsites.net/equipment
 
 ###
 GET http://localhost:5141/equipment/1

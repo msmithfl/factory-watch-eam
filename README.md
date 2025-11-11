@@ -2,6 +2,13 @@
 
 A modern web-based Enterprise Asset Management (EAM) solution for tracking equipment maintenance, work orders, and asset lifecycle management. Built with ASP.NET Core and React to demonstrate full-stack development capabilities for asset-intensive operations.
 
+## 🚀 Live Demo
+- **Frontend:** https://factory-watch-eam.vercel.app/
+- **API:** https://supportive-happiness-production-d453.up.railway.app/
+- **API Documentation:** https://supportive-happiness-production-d453.up.railway.app/swagger
+
+> Note: Backend may take 30 seconds to wake from sleep on first request
+
 ## ✨ Features
 
 ### Core Functionality

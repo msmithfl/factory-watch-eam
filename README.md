@@ -4,7 +4,7 @@ A modern full-stack web application for tracking and managing equipment assets. 
 
 ## 🚀 Live Demo
 - **Application:** https://factory-watch-eam.vercel.app/
-- **API Documentation:** https://supportive-happiness-production-d453.up.railway.app/swagger
+- **API Documentation:** https://factory-watch-api.up.railway.app/swagger
 
 > Note: Backend may take 30 seconds to wake from sleep on first request
 

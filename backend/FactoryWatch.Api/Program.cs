@@ -30,12 +30,8 @@ var app = builder.Build();
 // 🎯 USE CORS
 app.UseCors("AllowReactApp");
 
-// ADD SWAGGER MIDDLEWARE (Development only) - serve Swagger tools
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger(); // Serves OpenAPI JSON at /swagger/v1/swagger.json
-    app.UseSwaggerUI(); // Serves Swagger UI at /swagger
-}
+app.UseSwagger(); // Serves OpenAPI JSON at /swagger/v1/swagger.json
+app.UseSwaggerUI(); // Serves Swagger UI at /swagger
 
 app.MapEquipmentEndpoints();
 

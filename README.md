@@ -117,7 +117,7 @@ The application will be available at `http://localhost:5173`
 
 The frontend automatically detects the environment and uses:
 - `http://localhost:5141` in development
-- `https://supportive-happiness-production-d453.up.railway.app` in production
+- `https://factory-watch-api.up.railway.app/` in production
 
 ### 4. Sample Data
 
@@ -157,7 +157,7 @@ FactoryWatch/
 
 ### Base URLs
 - **Local Development**: `http://localhost:5141`
-- **Production**: `https://supportive-happiness-production-d453.up.railway.app`
+- **Production**: `https://factory-watch-api.up.railway.app/`
 
 ### Endpoints
 
@@ -221,14 +221,14 @@ Test the API using the included HTTP file:
 
 Or test via Swagger UI:
 - Local: `http://localhost:5141/swagger`
-- Production: `https://supportive-happiness-production-d453.up.railway.app/swagger`
+- Production: `https://factory-watch-api.up.railway.app/swagger`
 
 ## 🚢 Deployment
 
 This application is deployed using:
 
 ### Backend - Railway
-- **URL**: https://supportive-happiness-production-d453.up.railway.app
+- **URL**: https://factory-watch-api.up.railway.app
 - **Deployment**: Automatic from GitHub commits
 - **Database**: SQLite (included in deployment)
 

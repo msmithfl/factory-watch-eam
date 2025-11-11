@@ -14,7 +14,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Expose port (Render will set the PORT env variable)
+# Expose port (Railway will set the PORT env variable)
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 

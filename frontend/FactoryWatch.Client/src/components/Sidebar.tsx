@@ -5,8 +5,7 @@ function Sidebar() {
     <aside className="sidebar">
         <nav>
             <ul>
-                <li><Link to="/">Overview</Link></li>
-                <li><Link to="/equipment">Equipment</Link></li>
+                <li><Link to="/">Dashboard</Link></li>
             </ul>
         </nav>
     </aside>

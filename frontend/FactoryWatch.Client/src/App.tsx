@@ -16,7 +16,6 @@ function App() {
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Equipment />} />
-              <Route path="/equipment" element={<Equipment />} />
             </Routes>
           </main>
         </div>

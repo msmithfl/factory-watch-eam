@@ -3,7 +3,7 @@
 A modern full-stack web application for tracking and managing equipment assets. Built with ASP.NET Core and React to demonstrate comprehensive full-stack development skills including CRUD operations, API design, and cloud deployment.
 
 ## 🚀 Live Demo
-- **Application:** https://factory-watch-eam.vercel.app/
+- **Application:** https://factory-watch-eam.vercel.app
 - **API Documentation:** https://factory-watch-api.up.railway.app/swagger
 
 > Note: Backend may take 30 seconds to wake from sleep on first request
@@ -117,7 +117,7 @@ The application will be available at `http://localhost:5173`
 
 The frontend automatically detects the environment and uses:
 - `http://localhost:5141` in development
-- `https://factory-watch-api.up.railway.app/` in production
+- `https://factory-watch-api.up.railway.app` in production
 
 ### 4. Sample Data
 
@@ -157,7 +157,7 @@ FactoryWatch/
 
 ### Base URLs
 - **Local Development**: `http://localhost:5141`
-- **Production**: `https://factory-watch-api.up.railway.app/`
+- **Production**: `https://factory-watch-api.up.railway.app`
 
 ### Endpoints
 
@@ -277,10 +277,6 @@ Contributions are welcome! Please follow these steps:
 
 Please ensure your code follows the existing style and includes appropriate tests.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👤 Author
 
 **Matt Smith**
@@ -293,10 +289,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Inspired by enterprise asset management solutions in manufacturing
 - Built as a technical demonstration for full-stack development capabilities
 - Special thanks to the .NET and React communities
-
-## 📞 Contact
-
-For questions or feedback, please open an issue or reach out via LinkedIn.
 
 ---
 

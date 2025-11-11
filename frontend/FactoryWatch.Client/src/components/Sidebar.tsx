@@ -7,7 +7,6 @@ function Sidebar() {
             <ul>
                 <li><Link to="/">Overview</Link></li>
                 <li><Link to="/equipment">Equipment</Link></li>
-                <li><Link to="/work-orders">Work Orders</Link></li>
             </ul>
         </nav>
     </aside>

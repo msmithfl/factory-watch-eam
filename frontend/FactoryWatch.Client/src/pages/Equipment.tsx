@@ -17,7 +17,7 @@ const getApiUrl = () => {
   // Use Railway in production, localhost in development
   return window.location.hostname === 'localhost' 
     ? 'http://localhost:5141'
-    : 'https://factory-watch-api.up.railway.app/';
+    : 'https://factory-watch-api.up.railway.app';
 };
 
 const API_BASE_URL = getApiUrl();

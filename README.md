@@ -1,81 +1,76 @@
-# FactoryWatch - Equipment Maintenance System
+# FactoryWatch - Equipment Management System
 
-A modern web-based Enterprise Asset Management (EAM) solution for tracking equipment maintenance, work orders, and asset lifecycle management. Built with ASP.NET Core and React to demonstrate full-stack development capabilities for asset-intensive operations.
+A modern full-stack web application for tracking and managing equipment assets. Built with ASP.NET Core and React to demonstrate comprehensive full-stack development skills including CRUD operations, API design, and cloud deployment.
 
 ## 🚀 Live Demo
-- **Frontend:** https://factory-watch-eam.vercel.app/
-- **API:** https://supportive-happiness-production-d453.up.railway.app/
+- **Application:** https://factory-watch-eam.vercel.app/
 - **API Documentation:** https://supportive-happiness-production-d453.up.railway.app/swagger
 
 > Note: Backend may take 30 seconds to wake from sleep on first request
 
 ## ✨ Features
 
-### Core Functionality
-- **Equipment Dashboard** - Real-time overview of all machinery with status indicators
-- **Work Order Management** - Create, assign, track, and complete maintenance tasks
-- **Maintenance History** - Comprehensive logging of all maintenance activities
-- **Analytics & Reporting** - Visual insights into equipment uptime and maintenance patterns
-- **Search & Filter** - Quick access to equipment by status, type, or location
+### Current Functionality
+- **Equipment Management** - Full CRUD operations for equipment tracking
+- **Equipment Dashboard** - View all equipment with status indicators (Operational, Under Maintenance, Out of Service, Decommissioned)
+- **Inline Editing** - Edit equipment details directly in the interface
+- **Real-time Updates** - Add, update, and delete equipment with immediate UI feedback
+- **Responsive Design** - Works on desktop and mobile devices
 
 ### Technical Highlights
-- RESTful API architecture with ASP.NET Core
-- Responsive React UI with modern component design
-- Entity Framework Core with SQL Server for data persistence
-- Redux for predictable state management
-- Comprehensive unit and integration testing
-- Form validation on both client and server
-- Role-based view toggling (Manager/Technician)
+- RESTful API architecture with ASP.NET Core Minimal APIs
+- React UI with TypeScript for type safety
+- Entity Framework Core with SQLite database
+- Environment-based API configuration (localhost/production)
+- CORS configuration for cross-origin requests
+- Swagger/OpenAPI documentation
+- Cloud deployment (Railway + Vercel)
 
 ## 🛠️ Tech Stack
 
 ### Backend
-- **Framework**: ASP.NET Core 9.0 Web API
+- **Framework**: ASP.NET Core 9.0 Minimal APIs
 - **Language**: C# 13
 - **ORM**: Entity Framework Core 9.0
-- **Database**: SQL Server Express 2022
-- **Testing**: xUnit, Moq, FluentAssertions
+- **Database**: SQLite
 - **API Documentation**: Swagger/OpenAPI
+- **Deployment**: Railway
 
 ### Frontend
 - **Framework**: React 19
-- **Language**: JavaScript (ES6+) / TypeScript
-- **State Management**: Redux Toolkit
+- **Language**: TypeScript
+- **State Management**: React Hooks (useState, useEffect)
 - **Routing**: React Router v7
-- **UI Components**: Material-UI (MUI) v7
-- **Charts**: Recharts
-- **HTTP Client**: Axios
-- **Testing**: Jest, React Testing Library
+- **UI Components**: Custom components with inline styling
+- **HTTP Client**: Fetch API
 - **Build Tool**: Vite
+- **Deployment**: Vercel
 
 ### DevOps & Tools
-- **Version Control**: Git
-- **API Testing**: Postman/Swagger
-- **Code Quality**: ESLint, Prettier
-- **CI/CD**: GitHub Actions (optional)
+- **Version Control**: Git/GitHub
+- **API Testing**: HTTP files, Swagger UI
+- **Code Quality**: ESLint
+- **Deployment**: Railway (backend), Vercel (frontend)
 
 ## 📦 Prerequisites
 
 Before you begin, ensure you have the following installed:
 
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download) or later
+- [.NET 9.0 SDK](https://dotnet.microsoft.com/download)
 - [Node.js](https://nodejs.org/) (v18.x or later) and npm
-- [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) or SQL Server LocalDB
 - [Git](https://git-scm.com/)
 - A code editor ([Visual Studio Code](https://code.visualstudio.com/) recommended)
 
 ### Optional Tools
-- [Visual Studio 2022](https://visualstudio.microsoft.com/) (Community Edition or higher)
-- [SQL Server Management Studio (SSMS)](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
-- [Postman](https://www.postman.com/) for API testing
+- [Postman](https://www.postman.com/) for API testing (or use the included .http files)
 
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/factorywatch.git
-cd factorywatch
+git clone https://github.com/msmithfl/factory-watch-eam.git
+cd factory-watch-eam
 ```
 
 ### 2. Backend Setup
@@ -83,52 +78,33 @@ cd factorywatch
 Navigate to the backend directory:
 
 ```bash
-cd backend/FactoryWatch.API
+cd backend/FactoryWatch.Api
 ```
 
-Update the connection string in `appsettings.json`:
-
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=FactoryWatchDb;Trusted_Connection=True;MultipleActiveResultSets=true"
-  }
-}
-```
-
-Install dependencies and apply database migrations:
+The SQLite database connection is already configured in `appsettings.json`. Install dependencies and run:
 
 ```bash
 # Restore NuGet packages
 dotnet restore
 
-# Apply database migrations
-dotnet ef database update
-
-# Run the API
+# Run the API (migrations and seeding happen automatically)
 dotnet run
 ```
 
-The API will be available at `https://localhost:5001` (or `http://localhost:5000`)
+The API will be available at `http://localhost:5141`
 
 ### 3. Frontend Setup
 
 Open a new terminal and navigate to the frontend directory:
 
 ```bash
-cd frontend/factorywatch-ui
+cd frontend/FactoryWatch.Client
 ```
 
 Install dependencies:
 
 ```bash
 npm install
-```
-
-Update the API base URL in `src/config/api.js`:
-
-```javascript
-export const API_BASE_URL = 'https://localhost:5001/api';
 ```
 
 Start the development server:
@@ -139,59 +115,49 @@ npm run dev
 
 The application will be available at `http://localhost:5173`
 
-### 4. Seed Sample Data (Optional)
+The frontend automatically detects the environment and uses:
+- `http://localhost:5141` in development
+- `https://supportive-happiness-production-d453.up.railway.app` in production
 
-To populate the database with sample equipment and work orders:
+### 4. Sample Data
 
-```bash
-cd backend/FactoryWatch.API
-dotnet run --seed
-```
+The application automatically seeds the database with sample equipment data on first run.
 
 ## 📁 Project Structure
 
 ```
-factorywatch/
+FactoryWatch/
 ├── backend/
-│   ├── FactoryWatch.API/           # Web API project
-│   │   ├── Controllers/            # API endpoints
-│   │   ├── Models/                 # Domain models
-│   │   ├── Data/                   # DbContext and migrations
-│   │   ├── Services/               # Business logic
-│   │   ├── DTOs/                   # Data transfer objects
-│   │   └── Program.cs              # App entry point
-│   ├── FactoryWatch.Tests/         # Unit tests
-│   └── FactoryWatch.sln            # Solution file
+│   └── FactoryWatch.Api/           # Web API project
+│       ├── Data/                   # DbContext and migrations
+│       ├── Dtos/                   # Data transfer objects
+│       ├── Endpoints/              # Minimal API endpoints
+│       ├── Entities/               # Domain models
+│       ├── Dockerfile              # Docker configuration
+│       ├── equipment.http          # API test file
+│       └── Program.cs              # App entry point
 │
 ├── frontend/
-│   ├── factorywatch-ui/
-│   │   ├── src/
-│   │   │   ├── components/         # React components
-│   │   │   ├── pages/              # Page components
-│   │   │   ├── redux/              # Redux store and slices
-│   │   │   ├── services/           # API service layer
-│   │   │   ├── utils/              # Helper functions
-│   │   │   └── App.jsx             # Root component
-│   │   ├── public/                 # Static assets
-│   │   └── package.json
-│   └── tests/                      # Frontend tests
+│   └── FactoryWatch.Client/
+│       ├── src/
+│       │   ├── components/         # React components
+│       │   ├── pages/              # Page components
+│       │   ├── App.tsx             # Root component
+│       │   └── main.tsx            # Entry point
+│       ├── public/                 # Static assets
+│       ├── vercel.json             # Vercel configuration
+│       └── package.json
 │
-├── docs/                           # Documentation
-│   ├── api/                        # API documentation
-│   ├── screenshots/                # Application screenshots
-│   └── architecture.md             # Architecture overview
-│
-├── .gitignore
+├── ARCHITECTURE.md                 # Architecture documentation
 ├── README.md
-└── LICENSE
+└── .gitignore
 ```
 
 ## 📚 API Documentation
 
-### Base URL
-```
-https://localhost:5001/api
-```
+### Base URLs
+- **Local Development**: `http://localhost:5141`
+- **Production**: `https://supportive-happiness-production-d453.up.railway.app`
 
 ### Endpoints
 
@@ -204,33 +170,19 @@ https://localhost:5001/api
 | POST | `/equipment` | Create new equipment |
 | PUT | `/equipment/{id}` | Update equipment |
 | DELETE | `/equipment/{id}` | Delete equipment |
-| GET | `/equipment/{id}/history` | Get maintenance history |
-
-#### Work Orders
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/workorders` | Get all work orders |
-| GET | `/workorders/{id}` | Get work order by ID |
-| POST | `/workorders` | Create new work order |
-| PUT | `/workorders/{id}` | Update work order |
-| DELETE | `/workorders/{id}` | Delete work order |
-| PATCH | `/workorders/{id}/status` | Update work order status |
 
 ### Sample Request
 
 **Create Equipment:**
 ```bash
-POST /api/equipment
+POST /equipment
 Content-Type: application/json
 
 {
   "name": "Hydraulic Press #3",
-  "type": "Press",
   "location": "Assembly Line A",
-  "status": "Operational",
-  "installDate": "2023-01-15",
-  "nextMaintenanceDate": "2025-12-01"
+  "status": 0,
+  "description": "Main hydraulic press for metal forming"
 }
 ```
 
@@ -239,122 +191,79 @@ Content-Type: application/json
 {
   "id": 1,
   "name": "Hydraulic Press #3",
-  "type": "Press",
   "location": "Assembly Line A",
   "status": "Operational",
-  "installDate": "2023-01-15T00:00:00",
-  "lastMaintenanceDate": null,
-  "nextMaintenanceDate": "2025-12-01T00:00:00",
-  "createdAt": "2025-11-04T10:30:00"
+  "lastMaintenanceDate": "2025-11-05T10:30:00",
+  "nextMaintenanceDate": null,
+  "description": "Main hydraulic press for metal forming",
+  "createdAt": "2025-11-05T10:30:00"
 }
 ```
 
-For complete API documentation, run the application and visit `https://localhost:5001/swagger`
+**Status Values:**
+- 0 = Operational
+- 1 = Under Maintenance
+- 2 = Out of Service  
+- 3 = Decommissioned
+
+For complete API documentation, visit the Swagger UI at `/swagger` endpoint.
 
 ## 🧪 Testing
 
-### Backend Tests
+### API Testing
 
-Run all backend tests:
-
-```bash
-cd backend/FactoryWatch.Tests
-dotnet test
-```
-
-Run tests with coverage:
+Test the API using the included HTTP file:
 
 ```bash
-dotnet test /p:CollectCoverage=true /p:CoverageReporter=html
+# Open backend/FactoryWatch.Api/equipment.http in VS Code
+# Use the REST Client extension to run requests
 ```
 
-### Frontend Tests
-
-Run all frontend tests:
-
-```bash
-cd frontend/factorywatch-ui
-npm test
-```
-
-Run tests with coverage:
-
-```bash
-npm run test:coverage
-```
-
-### Test Coverage Goals
-- Backend: 80%+ code coverage
-- Frontend: 70%+ code coverage
-- All critical business logic fully tested
+Or test via Swagger UI:
+- Local: `http://localhost:5141/swagger`
+- Production: `https://supportive-happiness-production-d453.up.railway.app/swagger`
 
 ## 🚢 Deployment
 
-### Backend Deployment (Azure App Service)
+This application is deployed using:
 
-1. Publish the application:
-```bash
-cd backend/FactoryWatch.API
-dotnet publish -c Release -o ./publish
-```
+### Backend - Railway
+- **URL**: https://supportive-happiness-production-d453.up.railway.app
+- **Deployment**: Automatic from GitHub commits
+- **Database**: SQLite (included in deployment)
 
-2. Deploy to Azure:
-```bash
-az webapp deploy --resource-group <resource-group> --name <app-name> --src-path ./publish
-```
+### Frontend - Vercel  
+- **URL**: https://factory-watch-eam.vercel.app
+- **Deployment**: Automatic from GitHub commits
+- **Configuration**: Includes `vercel.json` for SPA routing
 
-### Frontend Deployment (Vercel/Netlify)
-
-1. Build the application:
-```bash
-cd frontend/factorywatch-ui
-npm run build
-```
-
-2. Deploy to Vercel:
-```bash
-vercel --prod
-```
-
-Or deploy to Netlify:
-```bash
-netlify deploy --prod --dir=dist
-```
-
-### Environment Variables
-
-**Backend (.env or Azure App Settings):**
-```
-ConnectionStrings__DefaultConnection=<your-connection-string>
-ASPNETCORE_ENVIRONMENT=Production
-```
-
-**Frontend (.env.production):**
-```
-VITE_API_BASE_URL=https://your-api.azurewebsites.net/api
-```
+### Local Development
+The frontend automatically detects the environment:
+- Uses `localhost:5141` when running locally
+- Uses Railway URL when deployed to production
 
 ## 🗺️ Roadmap
 
-### Phase 1 (Current)
+### Phase 1 (Completed)
 - [x] Equipment CRUD operations
-- [x] Work order management
-- [x] Basic dashboard with status indicators
-- [x] Maintenance history tracking
+- [x] Equipment status management
+- [x] Basic responsive UI
+- [x] Cloud deployment (Railway + Vercel)
+- [x] Environment-based configuration
 
 ### Phase 2 (Planned)
+- [ ] Work order management
 - [ ] User authentication and authorization
-- [ ] Real-time notifications for overdue maintenance
-- [ ] Advanced analytics dashboard
-- [ ] Mobile-responsive design improvements
-- [ ] Export reports to PDF/Excel
+- [ ] Equipment maintenance history
+- [ ] Advanced dashboard with charts
+- [ ] Search and filtering capabilities
 
 ### Phase 3 (Future)
+- [ ] Real-time notifications
+- [ ] Export functionality
 - [ ] Multi-tenant support
-- [ ] Integration with IoT sensors
-- [ ] Predictive maintenance algorithms
-- [ ] Mobile app (React Native)
-- [ ] Advanced reporting with Power BI
+- [ ] Mobile app
+- [ ] Advanced analytics
 
 ## 🤝 Contributing
 
@@ -387,8 +296,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-For questions or feedback, please open an issue or contact me at your.email@example.com
+For questions or feedback, please open an issue or reach out via LinkedIn.
 
 ---
 
-**Note**: This is a portfolio/demonstration project showcasing full-stack development skills with .NET Core and React. It is not intended for production use without further security hardening and feature development.
+**Note**: This is a portfolio/demonstration project showcasing full-stack development skills with ASP.NET Core and React. It demonstrates CRUD operations, API design, database integration, and cloud deployment capabilities.

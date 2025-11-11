@@ -12,6 +12,16 @@ interface Equipment {
   createdAt: string
 }
 
+// At the top of Equipment.tsx
+const getApiUrl = () => {
+  // Use Railway in production, localhost in development
+  return window.location.hostname === 'localhost' 
+    ? 'http://localhost:5141'
+    : 'https://supportive-happiness-production-d453.up.railway.app';
+};
+
+const API_BASE_URL = getApiUrl();
+
 function Equipment() {
   const [equipment, setEquipment] = useState<Equipment[]>([])
   const [loading, setLoading] = useState(true)
@@ -34,7 +44,7 @@ function Equipment() {
   useEffect(() => {
     const fetchEquipment = async () => {
       try {
-        const response = await fetch('http://localhost:5141/equipment')
+        const response = await fetch(`${API_BASE_URL}/equipment`)
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -71,7 +81,7 @@ function Equipment() {
   // Create new equipment
   const createEquipment = async () => {
     try {
-      const response = await fetch('http://localhost:5141/equipment', {
+      const response = await fetch(`${API_BASE_URL}/equipment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -110,7 +120,7 @@ function Equipment() {
   // Update equipment
   const updateEquipment = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:5141/equipment/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/equipment/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -152,7 +162,7 @@ function Equipment() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5141/equipment/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/equipment/${id}`, {
         method: 'DELETE'
       })
 

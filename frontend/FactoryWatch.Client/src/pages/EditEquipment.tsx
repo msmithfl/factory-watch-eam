@@ -1,14 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/api'
-import type { Equipment } from '../types/equipment'
-
-interface EditEquipmentForm {
-  name: string
-  location: string
-  status: string
-  description: string
-}
+import type { Equipment, EditEquipmentForm } from '../types/equipment'
 
 function EditEquipment() {
   const navigate = useNavigate()

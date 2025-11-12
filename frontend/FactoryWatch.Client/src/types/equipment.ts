@@ -16,4 +16,11 @@ export interface CreateEquipmentForm {
   description: string
 }
 
+export interface EditEquipmentForm {
+  name: string
+  location: string
+  status: string
+  description: string
+}
+
 export type EquipmentStatus = 'Operational' | 'UnderMaintenance' | 'OutOfService' | 'Decommissioned'

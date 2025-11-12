@@ -1,10 +1,27 @@
+import { Link } from "react-router-dom";
+
 function WorkOrders() {
   return (
-    <>
-        <div>
-            <h1>Work Orders</h1>
-        </div>
-    </>
+    <div className="flex flex-col p-6">
+      <div className="text-white text-sm">
+        <p>Work Orders</p>
+      </div>
+      {/* Page Header */}
+      <div className="flex justify-between items-center pb-6">
+        <h1 className="text-white text-2xl font-bold">Work Orders</h1>
+        <Link 
+          to="/work-orders/new"
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+        >
+          + Create Work Order
+        </Link>
+      </div>
+      
+      {/* Table Section */}
+      <div className="bg-white border rounded p-4">
+        <p>Table content goes here</p>
+      </div>
+    </div>
   )
 }
 

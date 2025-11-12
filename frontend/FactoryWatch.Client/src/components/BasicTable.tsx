@@ -55,22 +55,27 @@ export default function BasicTable({ small = false }: BasicTableProps) {
             <Table sx={{ minWidth: 450 }} size={small ? "small" : "medium"}  aria-label="equipment table">
                 <TableHead>
                     <TableRow className="border-b border-gray-600">
+                        {!small && (
+                            <TableCell 
+                                className="text-white font-bold"
+                                sx={{ color: 'white', borderBottom: '1px solid #4b5563', backgroundColor: '#374151', fontWeight: 'bold' }}
+                            >
+                                ID
+                            </TableCell>
+                        )}
                         <TableCell 
-                            align="left"
                             className="text-white font-bold"
                             sx={{ color: 'white', borderBottom: '1px solid #4b5563', backgroundColor: '#374151', fontWeight: 'bold' }}
                         >
                             Name
                         </TableCell>
                         <TableCell 
-                            align="right"
                             className="text-white font-bold"
                             sx={{ color: 'white', borderBottom: '1px solid #4b5563', backgroundColor: '#374151', fontWeight: 'bold' }}
                         >
                             Location
                         </TableCell>
                         <TableCell 
-                            align="right"
                             className="text-white font-bold"
                             sx={{ color: 'white', borderBottom: '1px solid #4b5563', backgroundColor: '#374151', fontWeight: 'bold' }}
                         >
@@ -85,22 +90,27 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                             className="hover:bg-gray-700"
                             sx={{  '&:last-child td, &:last-child th': { border: 0 }, '&:hover': { backgroundColor: '#374151' } }}
                         >
+                            {!small && (
+                                <TableCell 
+                                    className="text-gray-100"
+                                    sx={{ color: '#f3f4f6', borderBottom: '1px solid #4b5563' }}
+                                >
+                                    {item.id}
+                                </TableCell>
+                            )}
                             <TableCell 
-                                align="left"
                                 className="text-gray-100"
                                 sx={{ color: '#f3f4f6', borderBottom: '1px solid #4b5563' }}
                             >
                                 {item.name}
                             </TableCell>
                             <TableCell 
-                                align="right"
                                 className="text-gray-100"
                                 sx={{ color: '#f3f4f6', borderBottom: '1px solid #4b5563' }}
                             >
                                 {item.location}
                             </TableCell>
                             <TableCell 
-                                align="right"
                                 className="text-gray-100"
                                 sx={{ color: '#f3f4f6', borderBottom: '1px solid #4b5563' }}
                             >

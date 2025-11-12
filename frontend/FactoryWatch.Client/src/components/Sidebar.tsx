@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
 import { MdDashboard } from 'react-icons/md'
-import { FiSettings } from 'react-icons/fi'
 import { BsClipboardCheck } from 'react-icons/bs'
 import { FaTools } from "react-icons/fa";
 

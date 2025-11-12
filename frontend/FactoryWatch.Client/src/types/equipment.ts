@@ -9,4 +9,11 @@ export interface Equipment {
   createdAt: string
 }
 
+export interface CreateEquipmentForm {
+  name: string
+  location: string
+  status: string
+  description: string
+}
+
 export type EquipmentStatus = 'Operational' | 'UnderMaintenance' | 'OutOfService' | 'Decommissioned'

@@ -7,6 +7,7 @@ import NewEquipment from './pages/NewEquipment'
 import WorkOrders from './pages/WorkOrders'
 import NewWorkOrder from './pages/NewWorkOrder'
 import './App.css'
+import EditEquipment from './pages/EditEquipment'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/equipment" element={<Equipment />} />
             <Route path="/equipment/new" element={<NewEquipment />} />
+            <Route path="/equipment/edit/:id" element={<EditEquipment />} />
             <Route path="/work-orders" element={<WorkOrders />} />
             <Route path="/work-orders/new" element={<NewWorkOrder />} />
           </Routes>

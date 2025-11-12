@@ -6,8 +6,8 @@ import Equipment from './pages/Equipment'
 import NewEquipment from './pages/NewEquipment'
 import WorkOrders from './pages/WorkOrders'
 import NewWorkOrder from './pages/NewWorkOrder'
-import './App.css'
 import EditEquipment from './pages/EditEquipment'
+import './App.css'
 
 function App() {
   return (

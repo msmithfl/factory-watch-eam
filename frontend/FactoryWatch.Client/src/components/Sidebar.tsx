@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { MdDashboard } from 'react-icons/md'
 import { FiSettings } from 'react-icons/fi'
 import { BsClipboardCheck } from 'react-icons/bs'
+import { FaTools } from "react-icons/fa";
 
 function Sidebar() {
   const location = useLocation()
@@ -14,7 +15,7 @@ function Sidebar() {
         <ul className="space-y-2 text-white">
           <li>
             <Link 
-              to="/dashboard"
+              to="/"
               className={`flex items-center gap-3 py-2 px-3 rounded cursor-pointer transition-colors ${
                 isActive('/dashboard') || isActive('/') 
                   ? 'bg-gray-600 text-white' 
@@ -35,7 +36,7 @@ function Sidebar() {
                   : 'hover:bg-gray-700'
               }`}
             >
-              <FiSettings size={20} />
+              <FaTools size={20} />
               <span>Equipment</span>
             </Link>
           </li>

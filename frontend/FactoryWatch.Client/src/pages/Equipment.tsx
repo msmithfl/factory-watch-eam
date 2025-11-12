@@ -19,8 +19,8 @@ function Equipment() {
       </div>
       
       {/* Table Section */}
-      <div className="bg-white border rounded p-4">
-        <p>Table content goes here</p>
+      <div className="bg-gray-800 border border-gray-600 rounded p-4">
+        <p className="text-white">Table content goes here</p>
       </div>
     </div>
   )

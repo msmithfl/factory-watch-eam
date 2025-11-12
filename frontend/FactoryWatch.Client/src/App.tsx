@@ -5,26 +5,26 @@ import Dashboard from './pages/Dashboard'
 import Equipment from './pages/Equipment'
 import NewEquipment from './pages/NewEquipment'
 import WorkOrders from './pages/WorkOrders'
-import './App.css'
 import NewWorkOrder from './pages/NewWorkOrder'
+import './App.css'
 
 function App() {
   return (
-    <>
-      {/* Header */}
-      <div className='flex bg-gray-800 border-b-2 border-gray-600 min-h-16'>
+    <div className="min-h-screen flex flex-col">
+      {/* Header - Fixed height, never shrinks */}
+      <div className='flex bg-gray-800 border-b-2 border-gray-600 h-16 flex-shrink-0'>
         <Header />
       </div>
       
-      {/* Main Layout */}
-      <div className='flex'>
+      {/* Main Layout - Takes remaining space */}
+      <div className='flex flex-1 min-h-0'>
         {/* Sidebar */}
-        <div className='w-1/6 h-svh bg-gray-800 hidden md:block border-r-2 border-gray-600'>
+        <div className='w-1/6 bg-gray-800 hidden md:block border-r-2 border-gray-600 flex-shrink-0'>
           <Sidebar />
         </div>
         
         {/* Main Content Area */}
-        <div className='w-full md:w-5/6 h-svh bg-gray-900 overflow-y-auto'>
+        <div className='w-full md:w-5/6 bg-gray-900 overflow-y-auto'>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -35,7 +35,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

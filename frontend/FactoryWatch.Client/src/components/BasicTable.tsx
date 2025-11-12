@@ -6,58 +6,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../utils/api';
 
-const getApiUrl = () => {
-  return window.location.hostname === 'localhost' 
-    ? 'http://localhost:5141'
-    : 'https://factory-watch-api.up.railway.app';
-};
-
-const API_BASE_URL = getApiUrl();
-
-// Helper function to get Tailwind color classes based on status
-function getStatusColor(status: string): string {
-  switch (status) {
-    case 'Operational': return 'bg-green-600 text-white'
-    case 'UnderMaintenance': return 'bg-orange-600 text-white'
-    case 'OutOfService': return 'bg-red-600 text-white'
-    case 'Decommissioned': return 'bg-gray-600 text-white'
-    default: return 'bg-black text-white'
-  }
-}
-
-// Helper function to display user-friendly status names
-function getStatusDisplay(status: string): string {
-  switch (status) {
-    case 'Operational': return 'Operational'
-    case 'UnderMaintenance': return 'Under Maintenance'
-    case 'OutOfService': return 'Out of Service'
-    case 'Decommissioned': return 'Decommissioned'
-    default: return status
-  }
-}
-
-// Helper function to get dot color classes based on status
-function getDotColor(status: string): string {
-  switch (status) {
-    case 'Operational': return 'bg-green-500'
-    case 'UnderMaintenance': return 'bg-orange-500'
-    case 'OutOfService': return 'bg-red-500'
-    case 'Decommissioned': return 'bg-gray-500'
-    default: return 'bg-black'
-  }
-}
-
-interface Equipment {
-  id: number
-  name: string
-  location: string
-  status: string
-  lastMaintenanceDate: string
-  nextMaintenanceDate?: string
-  description?: string
-  createdAt: string
-}
+// Import the StatusBadge component
+import { StatusBadge } from './StatusBadge';
+import type { Equipment } from '../types/equipment';
 
 // Add props interface
 interface BasicTableProps {
@@ -151,19 +104,7 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                                 className="text-gray-100"
                                 sx={{ color: '#f3f4f6', borderBottom: '1px solid #4b5563' }}
                             >
-                                {small ? (
-                                    <div className="text-right">
-                                        <div 
-                                            className={`w-3 h-3 rounded-full ${getDotColor(item.status)} inline-block`}
-                                            title={getStatusDisplay(item.status)}
-                                        ></div>
-                                    </div>
-                                ) : (
-                                    // Regular version: colored badge with text
-                                    <span className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(item.status)}`}>
-                                        {getStatusDisplay(item.status)}
-                                    </span>
-                                )}
+                                <StatusBadge status={item.status} small={small} />
                             </TableCell>
                         </TableRow>
                     ))}

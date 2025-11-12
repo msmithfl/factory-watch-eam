@@ -108,6 +108,7 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                             Location
                         </TableCell>
                         <TableCell 
+                            align={small ? "right" : "left"}
                             className="text-white font-bold"
                             sx={{ color: 'white', borderBottom: '1px solid #4b5563', backgroundColor: '#374151', fontWeight: 'bold' }}
                         >
@@ -153,6 +154,7 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                                 {item.location}
                             </TableCell>
                             <TableCell 
+                                align={small ? "right" : "left"}
                                 className="text-gray-100"
                                 sx={{ color: '#f3f4f6', borderBottom: '1px solid #4b5563' }}
                             >

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 
 function Equipment() {
   return (
@@ -11,9 +12,9 @@ function Equipment() {
         <h1 className="text-white text-2xl font-bold">Equipment</h1>
         <Link 
           to="/equipment/new"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+          className="flex items-center gap-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
         >
-          + Create Equipment
+          <FaPlus size={15}/>Create
         </Link>
       </div>
       

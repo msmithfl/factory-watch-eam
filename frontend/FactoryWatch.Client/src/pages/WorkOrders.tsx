@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 
 function WorkOrders() {
   return (
@@ -11,9 +12,9 @@ function WorkOrders() {
         <h1 className="text-white text-2xl font-bold">Work Orders</h1>
         <Link 
           to="/work-orders/new"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+          className="flex items-center gap-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
         >
-          + Create Work Order
+          <FaPlus size={15}/>Create
         </Link>
       </div>
       

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function Overview() {
   return (
     <div className="flex flex-col p-6">
@@ -7,7 +5,7 @@ function Overview() {
         <p>Dashboard</p>
       </div>
       {/* Page Header */}
-      <div className="flex justify-between items-center pb-6">
+      <div className="flex justify-between items-center pb-6 min-h-16">
         <h1 className="text-white text-2xl font-bold">Dashboard</h1>
       </div>
       

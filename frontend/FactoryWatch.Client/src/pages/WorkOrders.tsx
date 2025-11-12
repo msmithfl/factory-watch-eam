@@ -20,7 +20,7 @@ function WorkOrders() {
       
       {/* Table Section */}
       <div className="bg-gray-800 border border-gray-600 rounded p-4">
-        <p className="text-white">Table content goes here</p>
+        <p className="text-white">Work orders go here.</p>
       </div>
     </div>
   )

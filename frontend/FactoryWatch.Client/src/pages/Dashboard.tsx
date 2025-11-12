@@ -1,3 +1,5 @@
+import BasicTable from "../components/BasicTable";
+
 function Dashboard() {
   return (
     <div className="flex flex-col p-6 h-full md:h-full">
@@ -15,7 +17,8 @@ function Dashboard() {
         <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
           <h3 className="font-bold text-xl mb-3 text-white">Equipment Overview</h3>
           <div className="text-3xl font-bold text-blue-600 mb-2">24</div>
-          <p className="text-white">Active machines</p>
+          <p className="text-white pb-3">Active machines</p>
+          <BasicTable small />
         </div>
         
         {/* Top Right / Second Mobile */}

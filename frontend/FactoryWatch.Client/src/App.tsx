@@ -24,7 +24,7 @@ function App() {
         </div>
         
         {/* Main Content Area */}
-        <div className='w-full md:w-5/6 bg-gray-900 overflow-y-auto'>
+        <div className='w-full md:w-5/6 md:px-14 bg-gray-900'>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />

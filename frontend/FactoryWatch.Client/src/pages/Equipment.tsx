@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import BasicTable from "../components/BasicTable";
 
 function Equipment() {
   return (
@@ -19,8 +20,8 @@ function Equipment() {
       </div>
       
       {/* Table Section */}
-      <div className="bg-gray-800 border border-gray-600 rounded p-4">
-        <p className="text-white">Table content goes here</p>
+      <div>
+        <BasicTable />
       </div>
     </div>
   )

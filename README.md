@@ -41,7 +41,7 @@ A modern full-stack web application for tracking and managing equipment assets. 
 - **Language**: TypeScript
 - **State Management**: React Hooks (useState, useEffect)
 - **Routing**: React Router v7
-- **UI Components**: Custom components with inline styling
+- **UI Components**: TailwindCSS, Material UI
 - **HTTP Client**: Fetch API
 - **Build Tool**: Vite
 - **Deployment**: Vercel

@@ -10,6 +10,7 @@ public static class WorkOrderEndpoints
     public static RouteGroupBuilder MapWorkOrderEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/work-orders")
+            .WithParameterValidation()
             .WithTags("Work Orders");
 
         // GET /work-orders - Get all work orders
@@ -31,7 +32,11 @@ public static class WorkOrderEndpoints
                 .ToListAsync();
 
             return Results.Ok(workOrders);
-        });
+        })
+        .WithName("GetAllWorkOrders")
+        .WithSummary("Get all work orders")
+        .WithDescription("Returns a list of all work orders for all equipment")
+        .Produces<List<WorkOrderResponseDto>>(StatusCodes.Status200OK);
 
         // GET /work-orders/{id} - Get single work order
         group.MapGet("/{id}", async (int id, FactoryWatchContext db) =>
@@ -53,7 +58,12 @@ public static class WorkOrderEndpoints
                 .FirstOrDefaultAsync();
 
             return workOrder is not null ? Results.Ok(workOrder) : Results.NotFound();
-        });
+        })
+        .WithName("GetWorkOrderById")
+        .WithSummary("Get work order by ID")
+        .WithDescription("Returns a specific work order by its ID")
+        .Produces<WorkOrderResponseDto>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status404NotFound);
 
         // GET /work-orders/equipment/{equipmentId} - Get work orders for specific equipment
         group.MapGet("/equipment/{equipmentId}", async (int equipmentId, FactoryWatchContext db) =>
@@ -75,7 +85,11 @@ public static class WorkOrderEndpoints
                 .ToListAsync();
 
             return Results.Ok(workOrders);
-        });
+        })
+        .WithName("GetWorkOrdersByEquipment")
+        .WithSummary("Get work orders by equipment")
+        .WithDescription("Returns all work orders for a specific equipment ID")
+        .Produces<List<WorkOrderResponseDto>>(StatusCodes.Status200OK);
 
         // POST /work-orders - Create new work order
         group.MapPost("/", async (CreateWorkOrderDto dto, FactoryWatchContext db) =>
@@ -116,7 +130,13 @@ public static class WorkOrderEndpoints
             );
 
             return Results.Created($"/work-orders/{workOrder.Id}", result);
-        });
+        })
+        .WithName("CreateWorkOrder")
+        .WithSummary("Create new work order")
+        .WithDescription("Creates a new work order for equipment maintenance or repair")
+        .Accepts<CreateWorkOrderDto>("application/json")
+        .Produces<WorkOrderResponseDto>(StatusCodes.Status201Created)
+        .Produces(StatusCodes.Status404NotFound);
 
         // PUT /work-orders/{id} - Update work order
         group.MapPut("/{id}", async (int id, UpdateWorkOrderDto dto, FactoryWatchContext db) =>
@@ -134,7 +154,13 @@ public static class WorkOrderEndpoints
             await db.SaveChangesAsync();
 
             return Results.NoContent();
-        });
+        })
+        .WithName("UpdateWorkOrder")
+        .WithSummary("Update work order")
+        .WithDescription("Updates an existing work order's details")
+        .Accepts<UpdateWorkOrderDto>("application/json")
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status404NotFound);
 
         // POST /work-orders/{id}/complete - Mark work order as complete
         // This updates the equipment maintenance dates
@@ -167,7 +193,13 @@ public static class WorkOrderEndpoints
             await db.SaveChangesAsync();
 
             return Results.Ok(new { message = "Work order completed successfully" });
-        });
+        })
+        .WithName("CompleteWorkOrder")
+        .WithSummary("Complete work order")
+        .WithDescription("Marks a work order as completed and updates equipment maintenance dates (Last: today, Next: +90 days)")
+        .Produces<object>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status400BadRequest)
+        .Produces(StatusCodes.Status404NotFound);
 
         // DELETE /work-orders/{id} - Delete work order
         group.MapDelete("/{id}", async (int id, FactoryWatchContext db) =>
@@ -182,7 +214,12 @@ public static class WorkOrderEndpoints
             await db.SaveChangesAsync();
 
             return Results.NoContent();
-        });
+        })
+        .WithName("DeleteWorkOrder")
+        .WithSummary("Delete work order")
+        .WithDescription("Deletes a work order by ID")
+        .Produces(StatusCodes.Status204NoContent)
+        .Produces(StatusCodes.Status404NotFound);
 
         return group;
     }

@@ -1,0 +1,66 @@
+### Get all work orders (should be empty)
+GET http://localhost:5141/work-orders
+
+### Get all equipment (should have your existing data)
+GET http://localhost:5141/equipment
+
+### Create Work Order for Equipment ID 1
+POST http://localhost:5141/work-orders
+Content-Type: application/json
+
+{
+  "equipmentId": 1,
+  "title": "Belt slipping under load",
+  "description": "Needs tension adjustment",
+  "assignedTo": "John Smith"
+}
+
+### Create Work Order for Equipment ID 2
+POST http://localhost:5141/work-orders
+Content-Type: application/json
+
+{
+  "equipmentId": 2,
+  "title": "Hydraulic fluid leak",
+  "description": "Small leak detected near seal",
+  "assignedTo": "Mike Chen"
+}
+
+### Create Work Order for Equipment ID 3
+POST http://localhost:5141/work-orders
+Content-Type: application/json
+
+{
+  "equipmentId": 3,
+  "title": "Calibration check needed",
+  "description": "Annual precision calibration",
+  "assignedTo": "Sarah Lee"
+}
+
+### Get all work orders (should now have 3)
+GET http://localhost:5141/work-orders
+
+### Get work orders for specific equipment (e.g., Equipment ID 1)
+GET http://localhost:5141/work-orders/equipment/1
+
+### Get single work order (e.g., ID 1)
+GET http://localhost:5141/work-orders/1
+
+### Update work order (e.g., ID 1)
+PUT http://localhost:5141/work-orders/1
+Content-Type: application/json
+
+{
+  "title": "Belt slipping - URGENT",
+  "description": "Needs immediate tension adjustment",
+  "assignedTo": "John Smith"
+}
+
+### Complete work order (this updates equipment maintenance dates!)
+POST http://localhost:5141/work-orders/1/complete
+
+### Verify equipment maintenance dates were updated
+GET http://localhost:5141/equipment/1
+
+### Delete work order (e.g., ID 1)
+DELETE http://localhost:5141/work-orders/1

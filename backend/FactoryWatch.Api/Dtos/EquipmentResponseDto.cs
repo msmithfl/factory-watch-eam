@@ -7,7 +7,7 @@ public record class EquipmentResponseDto(
     string Name,
     string Location,
     string Status,
-    DateOnly LastMaintenanceDate,
+    DateOnly? LastMaintenanceDate,
     DateOnly? NextMaintenanceDate,
     string? Description,
     DateTime CreatedAt

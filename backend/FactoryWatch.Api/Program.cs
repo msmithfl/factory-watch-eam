@@ -10,16 +10,17 @@ builder.Services.AddSqlite<FactoryWatchContext>(connString);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 🎯 ADD CORS SUPPORT
+// 🎯 DYNAMIC CORS - reads from appsettings.{Environment}.json
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>()
+    ?? new[] { "http://localhost:5173" }; // Fallback for local dev
+    
+Console.WriteLine($"CORS Origins: {string.Join(", ", corsOrigins)}"); // ← Add this for debugging
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins(
-            "http://localhost:5173",
-            "https://localhost:5173",
-            "https://factory-watch-eam.vercel.app"
-            )
+        policy.WithOrigins(corsOrigins)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });

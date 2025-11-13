@@ -11,8 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // 🎯 DYNAMIC CORS - reads from appsettings.{Environment}.json
-var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>() 
+var corsOrigins = builder.Configuration.GetSection("CorsOrigins").Get<string[]>()
     ?? new[] { "http://localhost:5173" }; // Fallback for local dev
+    
+Console.WriteLine($"CORS Origins: {string.Join(", ", corsOrigins)}"); // ← Add this for debugging
 
 builder.Services.AddCors(options =>
 {

@@ -28,7 +28,15 @@ export default function BasicTable({ small = false }: BasicTableProps) {
     useEffect(() => {
         const fetchEquipment = async () => {
             try {
+                // 🔍 DEBUG: Log the API URL being used
+                console.log('API_BASE_URL:', API_BASE_URL)
+                console.log('Fetching from:', `${API_BASE_URL}/equipment`)
+                
                 const response = await fetch(`${API_BASE_URL}/equipment`)
+
+                // 🔍 DEBUG: Log response details
+                console.log('Response status:', response.status)
+                console.log('Response headers:', [...response.headers.entries()])
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`)
@@ -37,6 +45,7 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                 const data: Equipment[] = await response.json()
                 setEquipment(data)
             } catch (err) {
+                console.error('Fetch error:', err) // 🔍 DEBUG
                 setError(err instanceof Error ? err.message : 'Failed to fetch equipment')
             } finally {
                 setLoading(false)

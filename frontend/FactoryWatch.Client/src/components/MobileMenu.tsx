@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { MdDashboard, MdClose } from 'react-icons/md'
 import { BsClipboardCheck } from 'react-icons/bs'
-import { FaTools } from "react-icons/fa"
+import { TbForklift } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg"
 import { useEffect, useRef } from 'react'
 
@@ -92,7 +92,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     : 'hover:bg-gray-700'
                 }`}
               >
-                <FaTools size={20} />
+                <TbForklift size={25} />
                 <span>Equipment</span>
               </Link>
             </li>

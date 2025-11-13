@@ -37,13 +37,7 @@ export default function BasicTable({ small = false }: BasicTableProps) {
     useEffect(() => {
         const fetchEquipment = async () => {
             try {
-                console.log('API_BASE_URL:', API_BASE_URL)
-                console.log('Fetching from:', `${API_BASE_URL}/equipment`)
-                
                 const response = await fetch(`${API_BASE_URL}/equipment`)
-
-                console.log('Response status:', response.status)
-                console.log('Response headers:', [...response.headers.entries()])
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`)
@@ -52,7 +46,6 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                 const data: Equipment[] = await response.json()
                 setEquipment(data)
             } catch (err) {
-                console.error('Fetch error:', err)
                 setError(err instanceof Error ? err.message : 'Failed to fetch equipment')
             } finally {
                 setLoading(false)
@@ -62,13 +55,25 @@ export default function BasicTable({ small = false }: BasicTableProps) {
         fetchEquipment()
     }, [])
 
+    // Navigate to details page
+    const handleRowClick = (id: number) => {
+        navigate(`/equipment/details/${id}`)
+    }
+
     // Open confirmation dialog
-    const handleDeleteClick = (id: number, name: string) => {
+    const handleDeleteClick = (e: React.MouseEvent, id: number, name: string) => {
+        e.stopPropagation() // Prevent row click
         setConfirmDialog({
             isOpen: true,
             equipmentId: id,
             equipmentName: name
         })
+    }
+
+    // Handle edit click
+    const handleEditClick = (e: React.MouseEvent, item: Equipment) => {
+        e.stopPropagation() // Prevent row click
+        navigate(`/equipment/edit/${item.id}`)
     }
 
     // Confirm deletion
@@ -113,10 +118,6 @@ export default function BasicTable({ small = false }: BasicTableProps) {
             equipmentId: null,
             equipmentName: ''
         })
-    }
-
-    const handleEdit = (item: Equipment) => {
-        navigate(`/equipment/edit/${item.id}`)
     }
 
     if (loading) return <div className="text-white text-center p-4">Loading equipment...</div>
@@ -174,8 +175,13 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                         {equipment.map((item) => (
                             <TableRow
                                 key={item.id}
-                                className="hover:bg-gray-700"
-                                sx={{  '&:last-child td, &:last-child th': { border: 0 }, '&:hover': { backgroundColor: '#374151' } }}
+                                onClick={() => handleRowClick(item.id)}
+                                className="hover:bg-gray-700 cursor-pointer"
+                                sx={{  
+                                    '&:last-child td, &:last-child th': { border: 0 }, 
+                                    '&:hover': { backgroundColor: '#374151' },
+                                    cursor: 'pointer'
+                                }}
                             >
                                 {!small && (
                                     <TableCell 
@@ -211,14 +217,14 @@ export default function BasicTable({ small = false }: BasicTableProps) {
                                 >
                                     <div className="flex justify-end gap-2">
                                         <button
-                                            onClick={() => handleEdit(item)}
+                                            onClick={(e) => handleEditClick(e, item)}
                                             className="p-2 text-blue-400 hover:text-blue-300 hover:bg-blue-900/20 rounded transition-colors"
                                             title={`Edit ${item.name}`}
                                         >
                                             <FaEdit size={14} />
                                         </button>
                                         <button
-                                            onClick={() => handleDeleteClick(item.id, item.name)}
+                                            onClick={(e) => handleDeleteClick(e, item.id, item.name)}
                                             className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded transition-colors"
                                             title={`Delete ${item.name}`}
                                         >

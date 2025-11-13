@@ -1,6 +1,6 @@
 # FactoryWatch - Equipment Management System
 
-A full-stack equipment tracking application built to demonstrate modern web development practices. Live deployment showcasing CRUD operations, RESTful API design, and cloud hosting.
+A full-stack Enterprise Asset Management (EAM) application built to demonstrate modern web development practices. Live deployment showcasing CRUD operations, RESTful API design, and cloud hosting.
 
 **Live Demo:** https://factory-watch-eam.vercel.app
 

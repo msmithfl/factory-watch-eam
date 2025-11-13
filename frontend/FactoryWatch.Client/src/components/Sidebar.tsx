@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { MdDashboard } from 'react-icons/md'
 import { BsClipboardCheck } from 'react-icons/bs'
-import { FaTools } from "react-icons/fa";
+import { TbForklift } from "react-icons/tb";
 
 function Sidebar() {
   const location = useLocation()
@@ -35,7 +35,7 @@ function Sidebar() {
                   : 'hover:bg-gray-700'
               }`}
             >
-              <FaTools size={20} />
+              <TbForklift size={25} />
               <span>Equipment</span>
             </Link>
           </li>

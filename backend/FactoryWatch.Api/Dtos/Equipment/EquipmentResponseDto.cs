@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FactoryWatch.Api.Dtos;
+namespace FactoryWatch.Api.Dtos.Equipment;
 
 public record class EquipmentResponseDto(
     int Id,

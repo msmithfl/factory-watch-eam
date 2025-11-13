@@ -1,4 +1,4 @@
-namespace FactoryWatch.Api.Dtos;
+namespace FactoryWatch.Api.Dtos.WorkOrders;
 
 public record UpdateWorkOrderDto(
     string? Title,

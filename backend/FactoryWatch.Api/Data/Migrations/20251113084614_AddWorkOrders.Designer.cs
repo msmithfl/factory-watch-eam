@@ -3,6 +3,7 @@ using System;
 using FactoryWatch.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FactoryWatch.Api.Data.Migrations
 {
     [DbContext(typeof(FactoryWatchContext))]
-    partial class FactoryWatchContextModelSnapshot : ModelSnapshot
+    [Migration("20251113084614_AddWorkOrders")]
+    partial class AddWorkOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.10");
@@ -52,44 +55,6 @@ namespace FactoryWatch.Api.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EquipmentList");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Main conveyor belt for assembly line",
-                            LastMaintenanceDate = new DateOnly(2024, 10, 15),
-                            Location = "Assembly Line 1",
-                            Name = "Conveyor Belt A1",
-                            NextMaintenanceDate = new DateOnly(2025, 1, 15),
-                            Status = 0,
-                            UpdatedAt = new DateTime(2024, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Heavy-duty hydraulic press",
-                            LastMaintenanceDate = new DateOnly(2024, 11, 1),
-                            Location = "Station 5",
-                            Name = "Hydraulic Press B2",
-                            NextMaintenanceDate = new DateOnly(2025, 2, 1),
-                            Status = 1,
-                            UpdatedAt = new DateTime(2024, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2024, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "6-axis robotic arm for precision assembly",
-                            LastMaintenanceDate = new DateOnly(2024, 9, 20),
-                            Location = "Assembly Line 2",
-                            Name = "Robotic Arm C3",
-                            NextMaintenanceDate = new DateOnly(2024, 12, 20),
-                            Status = 0,
-                            UpdatedAt = new DateTime(2024, 11, 1, 0, 0, 0, 0, DateTimeKind.Utc)
-                        });
                 });
 
             modelBuilder.Entity("FactoryWatch.Api.Entities.WorkOrder", b =>

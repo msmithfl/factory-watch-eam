@@ -35,6 +35,7 @@ app.UseSwagger(); // Serves OpenAPI JSON at /swagger/v1/swagger.json
 app.UseSwaggerUI(); // Serves Swagger UI at /swagger
 
 app.MapEquipmentEndpoints();
+app.MapWorkOrderEndpoints();
 
 await app.MigrateDbAsync();
 

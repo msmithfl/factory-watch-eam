@@ -1,5 +1,5 @@
 using FactoryWatch.Api.Data;
-using FactoryWatch.Api.Dtos;
+using FactoryWatch.Api.Dtos.Equipment;
 using FactoryWatch.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FactoryWatch.Api.Dtos;
+namespace FactoryWatch.Api.Dtos.Equipment;
 
 public record class EquipmentResponseDto(
     int Id,
     string Name,
     string Location,
     string Status,
-    DateOnly LastMaintenanceDate,
+    DateOnly? LastMaintenanceDate,
     DateOnly? NextMaintenanceDate,
     string? Description,
     DateTime CreatedAt

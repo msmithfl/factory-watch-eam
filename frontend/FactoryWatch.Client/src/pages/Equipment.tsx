@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-import BasicTable from "../components/BasicTable";
+import BasicTable from "../components/EquipmentTable";
 
 function Equipment() {
   return (

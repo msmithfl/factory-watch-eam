@@ -6,11 +6,13 @@ A full-stack Enterprise Asset Management (EAM) application built to demonstrate 
 
 ## What It Does
 
-Track and manage equipment assets with real-time status updates. Built as a portfolio project to demonstrate full-stack capabilities with .NET and React.
+Track and manage equipment assets with real-time status updates and work order management. Built as a portfolio project to demonstrate full-stack capabilities with .NET and React.
 
 **Key Features:**
-- Complete CRUD operations for equipment management
+- Complete CRUD operations for equipment and work order management
 - Real-time status tracking (Operational, Under Maintenance, Out of Service, Decommissioned)
+- Work order tracking for maintenance and repairs
+- Automatic maintenance date updates when work orders are completed
 - RESTful API with Swagger documentation
 - Responsive UI that works on mobile and desktop
 
@@ -40,12 +42,24 @@ Frontend runs at `http://localhost:5173`
 
 ## API Endpoints
 
+### Equipment
 ```
 GET    /equipment       - List all equipment
 GET    /equipment/{id}  - Get specific equipment
 POST   /equipment       - Create equipment
 PUT    /equipment/{id}  - Update equipment
 DELETE /equipment/{id}  - Delete equipment
+```
+
+### Work Orders
+```
+GET    /work-orders                    - List all work orders
+GET    /work-orders/{id}               - Get specific work order
+GET    /work-orders/equipment/{id}     - Get work orders for equipment
+POST   /work-orders                    - Create work order
+PUT    /work-orders/{id}               - Update work order
+POST   /work-orders/{id}/complete      - Complete work order (updates equipment maintenance dates)
+DELETE /work-orders/{id}               - Delete work order
 ```
 
 API docs: https://factory-watch-api.up.railway.app/swagger
@@ -55,6 +69,9 @@ API docs: https://factory-watch-api.up.railway.app/swagger
 ```
 backend/FactoryWatch.Api/  # ASP.NET Core API
   ├── Data/                # EF Core context & migrations
+  ├── Dtos/                # Data transfer objects
+  │   ├── Equipment/       # Equipment DTOs
+  │   └── WorkOrders/      # Work order DTOs
   ├── Endpoints/           # Minimal API endpoints
   └── Entities/            # Domain models
 
@@ -62,6 +79,21 @@ frontend/FactoryWatch.Client/  # React app
   ├── src/components/          # Reusable components
   └── src/pages/               # Page components
 ```
+
+## Key Features
+
+### Equipment Management
+- Track equipment status and location
+- Monitor maintenance schedules
+- View equipment history
+
+### Work Order System
+- Create work orders for equipment issues
+- Assign work to technicians
+- Track open and completed work
+- Automatic maintenance date updates on completion
+  - Last Maintenance Date → Set to completion date
+  - Next Maintenance Date → Set to +90 days
 
 ## Deployment
 
@@ -73,9 +105,10 @@ The project uses a staging → production workflow. Feature branches merge to `s
 ## What's Next
 
 - User authentication & authorization
-- Work order management system
-- Maintenance scheduling
+- Work order filtering and search
+- Maintenance scheduling automation
 - Equipment history & analytics
+- Cost tracking for maintenance
 
 ## Author
 

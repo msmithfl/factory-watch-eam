@@ -9,6 +9,8 @@ import NewWorkOrder from './pages/NewWorkOrder'
 import EditEquipment from './pages/EditEquipment'
 import './App.css'
 import EquipmentDetails from './pages/EquipmentDetails'
+import WorkOrderDetails from './pages/WorkOrderDetails'
+import EditWorkOrder from './pages/EditWorkOrder'
 
 function App() {
   return (
@@ -35,7 +37,9 @@ function App() {
             <Route path="/equipment/new" element={<NewEquipment />} />
             <Route path="/equipment/edit/:id" element={<EditEquipment />} />
             <Route path="/work-orders" element={<WorkOrders />} />
+            <Route path="/work-orders/details/:id" element={ <WorkOrderDetails />} />
             <Route path="/work-orders/new" element={<NewWorkOrder />} />
+            <Route path="/work-orders/edit/:id" element={<EditWorkOrder />} />
           </Routes>
         </div>
       </div>

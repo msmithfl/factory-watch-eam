@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../utils/api';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { StatusBadge } from './StatusBadge';
-import type { Equipment } from '../types/equipment';
+import type { Equipment } from '../types/Equipment';
 import ConfirmDialog from './ConfirmDialog';
 
 interface BasicTableProps {
   small?: boolean
 }
 
-export default function BasicTable({ small = false }: BasicTableProps) {
+export default function EquipmentTable({ small = false }: BasicTableProps) {
     const navigate = useNavigate()
     const [equipment, setEquipment] = useState<Equipment[]>([])
     const [loading, setLoading] = useState(true)

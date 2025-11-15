@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/api'
-import type { CreateEquipmentForm } from '../types/equipment';
+import type { CreateEquipmentForm } from '../types/Equipment';
 
 function NewEquipment() {
   const navigate = useNavigate()

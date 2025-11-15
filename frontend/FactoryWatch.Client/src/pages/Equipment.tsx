@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-import BasicTable from "../components/BasicTable";
+import EquipmentTable from "../components/EquipmentTable";
 
 function Equipment() {
   return (
@@ -21,7 +21,7 @@ function Equipment() {
       
       {/* Table Section */}
       <div>
-        <BasicTable />
+        <EquipmentTable />
       </div>
     </div>
   )

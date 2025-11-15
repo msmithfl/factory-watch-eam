@@ -1,8 +1,8 @@
 import { getStatusColor, getStatusDisplay, getDotColor } from '../utils/equipmentStatus'
+import type { EquipmentStatus } from '../utils/equipmentStatus'
 
-// Status Badge Component (reusable)
 interface StatusBadgeProps {
-  status: string
+  status: EquipmentStatus
   small?: boolean
 }
 

@@ -1,7 +1,18 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/api'
-import type { CreateEquipmentForm } from '../types/Equipment';
+import type { CreateEquipmentForm, EquipmentStatus } from '../types/Equipment'
+
+// Helper to convert status string to number for API
+const getStatusNumber = (status: EquipmentStatus): number => {
+  switch (status) {
+    case 'Operational': return 0
+    case 'UnderMaintenance': return 1
+    case 'OutOfService': return 2
+    case 'Decommissioned': return 3
+    default: return 0
+  }
+}
 
 function NewEquipment() {
   const navigate = useNavigate()
@@ -11,7 +22,7 @@ function NewEquipment() {
   const [formData, setFormData] = useState<CreateEquipmentForm>({
     name: '',
     location: '',
-    status: '0', // Operational
+    status: 'Operational',
     description: ''
   })
 
@@ -37,7 +48,7 @@ function NewEquipment() {
         body: JSON.stringify({
           name: formData.name,
           location: formData.location,
-          status: parseInt(formData.status),
+          status: getStatusNumber(formData.status), // Convert string to number
           description: formData.description || null
         })
       })
@@ -137,10 +148,10 @@ function NewEquipment() {
               required
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              <option value="0">Operational</option>
-              <option value="1">Under Maintenance</option>
-              <option value="2">Out of Service</option>
-              <option value="3">Decommissioned</option>
+              <option value="Operational">Operational</option>
+              <option value="UnderMaintenance">Under Maintenance</option>
+              <option value="OutOfService">Out of Service</option>
+              <option value="Decommissioned">Decommissioned</option>
             </select>
           </div>
 

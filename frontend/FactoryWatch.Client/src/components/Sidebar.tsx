@@ -10,9 +10,9 @@ const navItems = [
   { to: '/', icon: MdDashboard, label: 'Dashboard', iconSize: 20 },
   { to: '/equipment', icon: TbForklift, label: 'Equipment', iconSize: 25 },
   { to: '/work-orders', icon: BsClipboardCheck, label: 'Work Orders', iconSize: 20 },
-  { to: '#', icon: MdOutlineFactory, label: 'Locations', iconSize: 20 },
-  { to: '#', icon: FaHardHat, label: 'Technicians', iconSize: 20 },
-  { to: '#', icon: FaGear, label: 'Settings', iconSize: 20 },
+  { to: '/locations', icon: MdOutlineFactory, label: 'Locations', iconSize: 20 },
+  { to: '/technicians', icon: FaHardHat, label: 'Technicians', iconSize: 20 },
+  { to: '/settings', icon: FaGear, label: 'Settings', iconSize: 20 },
 ]
 
 function Sidebar() {

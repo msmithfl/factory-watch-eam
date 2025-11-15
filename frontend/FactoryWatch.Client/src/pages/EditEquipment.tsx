@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/api'
-import type { Equipment, EditEquipmentForm } from '../types/equipment'
+import type { Equipment, EditEquipmentForm } from '../types/Equipment'
 
 function EditEquipment() {
   const navigate = useNavigate()

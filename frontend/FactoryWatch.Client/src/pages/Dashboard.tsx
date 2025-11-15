@@ -1,4 +1,5 @@
-import BasicTable from "../components/BasicTable";
+import EquipmentTable from "../components/EquipmentTable";
+import WorkOrderTable from "../components/WorkOrderTable";
 
 function Dashboard() {
   return (
@@ -17,13 +18,14 @@ function Dashboard() {
         <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
           <h3 className="font-bold text-xl mb-3 text-white">Equipment Overview</h3>
           <div className="text-3xl font-bold text-blue-600 mb-4">24<span className="text-white text-base pl-3 font-normal">Active machines</span></div>
-          <BasicTable small />
+          <EquipmentTable small />
         </div>
         
         {/* Top Right / Second Mobile */}
         <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
           <h3 className="font-bold text-xl mb-3 text-white">Work Orders</h3>
           <div className="text-3xl font-bold text-green-600 mb-4">8<span className="text-white text-base pl-3 font-normal">Active work orders</span></div>
+          <WorkOrderTable />
         </div>
 
         {/* Add back in these section with charts VVV */}

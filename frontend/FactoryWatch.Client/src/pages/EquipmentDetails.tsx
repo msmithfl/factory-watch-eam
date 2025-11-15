@@ -2,7 +2,7 @@ import { FaChevronRight, FaEdit, FaTrash, FaArrowLeft } from "react-icons/fa";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../utils/api";
-import type { Equipment } from "../types/equipment";
+import type { Equipment } from "../types/Equipment";
 import { StatusBadge } from "../components/StatusBadge";
 import ConfirmDialog from "../components/ConfirmDialog";
 

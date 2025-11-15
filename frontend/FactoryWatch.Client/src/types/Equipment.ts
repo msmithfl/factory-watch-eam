@@ -1,8 +1,9 @@
+// types/Equipment.ts
 export interface Equipment {
   id: number
   name: string
   location: string
-  status: string
+  status: EquipmentStatus
   lastMaintenanceDate: string
   nextMaintenanceDate?: string
   description?: string
@@ -12,14 +13,14 @@ export interface Equipment {
 export interface CreateEquipmentForm {
   name: string
   location: string
-  status: string
+  status: EquipmentStatus
   description: string
 }
 
 export interface EditEquipmentForm {
   name: string
   location: string
-  status: string
+  status: EquipmentStatus
   description: string
 }
 

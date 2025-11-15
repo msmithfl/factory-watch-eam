@@ -1,5 +1,8 @@
+// Match C# enum names exactly as they're serialized
+export type EquipmentStatus = 'Operational' | 'UnderMaintenance' | 'OutOfService' | 'Decommissioned'
+
 // Helper function to get Tailwind color classes based on status
-export function getStatusColor(status: string): string {
+export function getStatusColor(status: EquipmentStatus): string {
   switch (status) {
     case 'Operational': return 'bg-green-600 text-white'
     case 'UnderMaintenance': return 'bg-orange-600 text-white'
@@ -10,7 +13,7 @@ export function getStatusColor(status: string): string {
 }
 
 // Helper function to display user-friendly status names
-export function getStatusDisplay(status: string): string {
+export function getStatusDisplay(status: EquipmentStatus): string {
   switch (status) {
     case 'Operational': return 'Operational'
     case 'UnderMaintenance': return 'Under Maintenance'
@@ -21,7 +24,7 @@ export function getStatusDisplay(status: string): string {
 }
 
 // Helper function to get dot color classes based on status
-export function getDotColor(status: string): string {
+export function getDotColor(status: EquipmentStatus): string {
   switch (status) {
     case 'Operational': return 'bg-green-500'
     case 'UnderMaintenance': return 'bg-orange-500'

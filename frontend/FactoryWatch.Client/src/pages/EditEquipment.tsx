@@ -1,7 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { API_BASE_URL } from '../utils/api'
-import type { Equipment, EditEquipmentForm } from '../types/Equipment'
+import type { Equipment, EditEquipmentForm, EquipmentStatus } from '../types/Equipment'
+
+// Helper to convert status string to number for API
+const getStatusNumber = (status: EquipmentStatus): number => {
+  switch (status) {
+    case 'Operational': return 0
+    case 'UnderMaintenance': return 1
+    case 'OutOfService': return 2
+    case 'Decommissioned': return 3
+    default: return 0
+  }
+}
 
 function EditEquipment() {
   const navigate = useNavigate()
@@ -15,7 +26,7 @@ function EditEquipment() {
   const [formData, setFormData] = useState<EditEquipmentForm>({
     name: '',
     location: '',
-    status: '0',
+    status: 'Operational',
     description: ''
   })
 
@@ -37,21 +48,11 @@ function EditEquipment() {
         const data: Equipment = await response.json()
         setEquipment(data)
 
-        // Convert status string to number value
-        const getStatusValue = (status: string): string => {
-          switch (status) {
-            case 'Operational': return '0'
-            case 'UnderMaintenance': return '1'
-            case 'OutOfService': return '2'
-            case 'Decommissioned': return '3'
-            default: return '0'
-          }
-        }
-
+        // API returns status as string: "Operational", "UnderMaintenance", etc.
         setFormData({
           name: data.name,
           location: data.location,
-          status: getStatusValue(data.status),
+          status: data.status, // String from API
           description: data.description || ''
         })
       } catch (err) {
@@ -68,7 +69,7 @@ function EditEquipment() {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value // Keep as string in form
     }))
   }
 
@@ -89,7 +90,7 @@ function EditEquipment() {
         body: JSON.stringify({
           name: formData.name,
           location: formData.location,
-          status: parseInt(formData.status),
+          status: getStatusNumber(formData.status), // Convert string to number for API
           nextMaintenanceDate: null,
           description: formData.description || null
         })
@@ -211,10 +212,10 @@ function EditEquipment() {
               required
               className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              <option value="0">Operational</option>
-              <option value="1">Under Maintenance</option>
-              <option value="2">Out of Service</option>
-              <option value="3">Decommissioned</option>
+              <option value="Operational">Operational</option>
+              <option value="UnderMaintenance">Under Maintenance</option>
+              <option value="OutOfService">Out of Service</option>
+              <option value="Decommissioned">Decommissioned</option>
             </select>
           </div>
 

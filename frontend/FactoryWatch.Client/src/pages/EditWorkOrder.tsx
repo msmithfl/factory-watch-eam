@@ -3,7 +3,6 @@ import { useNavigate, useParams, Link } from 'react-router-dom'
 import { FaChevronRight } from 'react-icons/fa'
 import { API_BASE_URL } from '../utils/api'
 import type { WorkOrder } from '../types/WorkOrder'
-import type { Equipment } from '../types/Equipment'
 
 interface EditWorkOrderForm {
   equipmentId: string
@@ -17,7 +16,7 @@ function EditWorkOrder() {
   const { id } = useParams<{ id: string }>()
   
   const [workOrder, setWorkOrder] = useState<WorkOrder | null>(null)
-  const [equipmentList, setEquipmentList] = useState<Equipment[]>([])
+  // Removed equipmentList - not needed since equipment is read-only
   const [loading, setLoading] = useState(false)
   const [fetchLoading, setFetchLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -29,7 +28,7 @@ function EditWorkOrder() {
     assignedTo: ''
   })
 
-  // Fetch work order and equipment list when component mounts
+  // Fetch work order when component mounts
   useEffect(() => {
     const fetchData = async () => {
       if (!id) {
@@ -38,21 +37,13 @@ function EditWorkOrder() {
       }
 
       try {
-        // Fetch work order details
+        // Only fetch work order details (equipment is read-only)
         const workOrderResponse = await fetch(`${API_BASE_URL}/work-orders/${id}`)
         if (!workOrderResponse.ok) {
           throw new Error('Failed to fetch work order')
         }
         const workOrderData: WorkOrder = await workOrderResponse.json()
         setWorkOrder(workOrderData)
-
-        // Fetch equipment list for dropdown
-        const equipmentResponse = await fetch(`${API_BASE_URL}/equipment`)
-        if (!equipmentResponse.ok) {
-          throw new Error('Failed to fetch equipment')
-        }
-        const equipmentData: Equipment[] = await equipmentResponse.json()
-        setEquipmentList(equipmentData)
 
         // Set form data
         setFormData({

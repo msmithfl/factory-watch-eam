@@ -1,58 +1,34 @@
-import { Link, useLocation } from 'react-router-dom'
 import { MdDashboard } from 'react-icons/md'
 import { BsClipboardCheck } from 'react-icons/bs'
-import { TbForklift } from "react-icons/tb";
+import { TbForklift } from "react-icons/tb"
+import { MdOutlineFactory } from "react-icons/md"
+import { FaHardHat } from "react-icons/fa"
+import { FaGear } from "react-icons/fa6"
+import NavLink from './NavLink'
+
+const navItems = [
+  { to: '/', icon: MdDashboard, label: 'Dashboard', iconSize: 20 },
+  { to: '/equipment', icon: TbForklift, label: 'Equipment', iconSize: 25 },
+  { to: '/work-orders', icon: BsClipboardCheck, label: 'Work Orders', iconSize: 20 },
+  { to: '#', icon: MdOutlineFactory, label: 'Locations', iconSize: 20 },
+  { to: '#', icon: FaHardHat, label: 'Technicians', iconSize: 20 },
+  { to: '#', icon: FaGear, label: 'Settings', iconSize: 20 },
+]
 
 function Sidebar() {
-  const location = useLocation()
-  
-  const isActive = (path: string) => location.pathname === path
-  
   return (
     <aside className="h-full">
       <nav className="p-4">
         <ul className="space-y-2 text-white">
-          <li>
-            <Link 
-              to="/"
-              className={`flex items-center gap-3 py-2 px-3 rounded cursor-pointer transition-colors ${
-                isActive('/dashboard') || isActive('/') 
-                  ? 'bg-gray-600 text-white' 
-                  : 'hover:bg-gray-700'
-              }`}
-            >
-              <MdDashboard size={20} />
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          
-          <li>
-            <Link 
-              to="/equipment"
-              className={`flex items-center gap-3 py-2 px-3 rounded cursor-pointer transition-colors ${
-                isActive('/equipment') 
-                  ? 'bg-gray-600 text-white' 
-                  : 'hover:bg-gray-700'
-              }`}
-            >
-              <TbForklift size={25} />
-              <span>Equipment</span>
-            </Link>
-          </li>
-          
-          <li>
-            <Link 
-              to="/work-orders"
-              className={`flex items-center gap-3 py-2 px-3 rounded cursor-pointer transition-colors ${
-                isActive('/work-orders') 
-                  ? 'bg-gray-600 text-white' 
-                  : 'hover:bg-gray-700'
-              }`}
-            >
-              <BsClipboardCheck size={20} />
-              <span>Work Orders</span>
-            </Link>
-          </li>
+          {navItems.map((item) => (
+            <NavLink 
+              key={item.to}
+              to={item.to}
+              icon={item.icon}
+              label={item.label}
+              iconSize={item.iconSize}
+            />
+          ))}
         </ul>
       </nav>
     </aside>

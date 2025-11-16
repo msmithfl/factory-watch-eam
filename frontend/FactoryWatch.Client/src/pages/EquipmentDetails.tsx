@@ -90,9 +90,9 @@ function EquipmentDetails() {
 
   return (
     <>
-      <div className="flex flex-col p-6 max-w-5xl mx-auto">
+      <div className="flex flex-col p-6 mx-auto">
         {/* Breadcrumb */}
-        <div className="flex items-center text-sm text-gray-300 mb-4">
+        <div className="flex items-center text-sm text-gray-300 mb-1">
           <Link to="/equipment" className="hover:text-white hover:underline cursor-pointer">
             Equipment
           </Link>
@@ -101,18 +101,18 @@ function EquipmentDetails() {
         </div>
 
         {/* Back Button */}
-        <button
+        {/* <button
           onClick={() => navigate('/equipment')}
           className="flex items-center gap-2 text-gray-300 hover:text-white mb-4 transition-colors"
         >
           <FaArrowLeft size={14} />
           <span>Back to Equipment</span>
-        </button>
+        </button> */}
 
         {/* Page Header */}
         <div className="flex justify-between items-start pb-6 border-b border-gray-700">
           <div>
-            <h1 className="text-white text-3xl font-bold mb-2">{equipment.name}</h1>
+            <h1 className="text-white text-2xl font-bold mb-2">{equipment.name}</h1>
             <StatusBadge status={equipment.status} />
           </div>
           

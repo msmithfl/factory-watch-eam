@@ -97,7 +97,7 @@ function NewWorkOrder() {
   return (
     <div className="flex flex-col p-6">
       {/* Breadcrumb */}
-      <div className="flex items-center text-sm text-gray-300 mb-4">
+      <div className="flex items-center text-sm text-gray-300 mb-1">
         <Link to="/work-orders" className="hover:text-white hover:underline cursor-pointer">
           Work Orders
         </Link>

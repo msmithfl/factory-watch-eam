@@ -74,7 +74,7 @@ function NewEquipment() {
   return (
     <div className="flex flex-col p-6">
       {/* Breadcrumb */}
-      <div className="flex items-center text-sm text-gray-300 mb-4">
+      <div className="flex items-center text-sm text-gray-300 mb-1">
         <span 
           className="hover:text-white cursor-pointer"
           onClick={() => navigate('/equipment')}

@@ -5,7 +5,7 @@ import WorkOrderTable from "../components/WorkOrderTable";
 function WorkOrders() {
   return (
     <div className="flex flex-col p-6">
-      <div className="text-white text-sm mb-2">
+      <div className="text-white text-sm">
         <p>Work Orders</p>
       </div>
       

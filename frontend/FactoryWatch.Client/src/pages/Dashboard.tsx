@@ -84,7 +84,7 @@ function Dashboard() {
               <>
                 {activeWorkOrdersCount}
                 <span className="text-white text-base pl-3 font-normal">
-                  Open work orders ({workOrdersCount} total)
+                  Open ({workOrdersCount} total)
                 </span>
               </>
             )}

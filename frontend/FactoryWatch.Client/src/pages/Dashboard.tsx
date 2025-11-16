@@ -113,7 +113,7 @@ function Dashboard() {
           <WorkOrderTable small />
         </div>
 
-        {/* Add back in these section with charts VVV */}
+        {/* Add back in these section with charts VV */}
 
         {/* <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
           <h3 className="font-bold text-xl mb-3 text-white">Maintenance Schedule</h3>

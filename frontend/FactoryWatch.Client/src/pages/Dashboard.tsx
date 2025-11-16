@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 import EquipmentTable from "../components/EquipmentTable";
 import WorkOrderTable from "../components/WorkOrderTable";
 import { API_BASE_URL } from "../utils/api";
@@ -57,8 +59,18 @@ function Dashboard() {
       
       {/* Responsive Grid - Stacked on mobile, 2x2 on desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:grid-rows-2 md:flex-1">
+        {/* Equipment Overview Card */}
         <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-          <h3 className="font-bold text-xl mb-3 text-white">Equipment Overview</h3>
+          <div className="flex justify-between items-start mb-3">
+            <h3 className="font-bold text-xl text-white">Equipment Overview</h3>
+            <Link 
+              to="/equipment/new"
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
+            >
+              <FaPlus size={12}/>
+              Create
+            </Link>
+          </div>
           <div className="text-3xl font-bold text-blue-600 mb-4">
             {loading ? (
               <span className="text-gray-400">...</span>
@@ -74,9 +86,18 @@ function Dashboard() {
           <EquipmentTable small />
         </div>
         
-        {/* Top Right / Second Mobile */}
+        {/* Work Orders Card */}
         <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-          <h3 className="font-bold text-xl mb-3 text-white">Work Orders</h3>
+          <div className="flex justify-between items-start mb-3">
+            <h3 className="font-bold text-xl text-white">Work Orders</h3>
+            <Link 
+              to="/work-orders/new"
+              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
+            >
+              <FaPlus size={12}/>
+              Create
+            </Link>
+          </div>
           <div className="text-3xl font-bold text-green-600 mb-4">
             {loading ? (
               <span className="text-gray-400">...</span>

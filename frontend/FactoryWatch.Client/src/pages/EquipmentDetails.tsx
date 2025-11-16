@@ -1,10 +1,11 @@
-import { FaChevronRight, FaEdit, FaTrash, FaArrowLeft } from "react-icons/fa";
+import { FaChevronRight, FaEdit, FaTrash} from "react-icons/fa";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../utils/api";
 import type { Equipment } from "../types/Equipment";
 import { StatusBadge } from "../components/StatusBadge";
 import ConfirmDialog from "../components/ConfirmDialog";
+import WorkOrderTable from "../components/WorkOrderTable";
 
 function EquipmentDetails() {
   const { id } = useParams<{ id: string }>()
@@ -90,9 +91,9 @@ function EquipmentDetails() {
 
   return (
     <>
-      <div className="flex flex-col p-6 max-w-5xl mx-auto">
+      <div className="flex flex-col p-6 mx-auto">
         {/* Breadcrumb */}
-        <div className="flex items-center text-sm text-gray-300 mb-4">
+        <div className="flex items-center text-sm text-gray-300 mb-1">
           <Link to="/equipment" className="hover:text-white hover:underline cursor-pointer">
             Equipment
           </Link>
@@ -101,18 +102,18 @@ function EquipmentDetails() {
         </div>
 
         {/* Back Button */}
-        <button
+        {/* <button
           onClick={() => navigate('/equipment')}
           className="flex items-center gap-2 text-gray-300 hover:text-white mb-4 transition-colors"
         >
           <FaArrowLeft size={14} />
           <span>Back to Equipment</span>
-        </button>
+        </button> */}
 
         {/* Page Header */}
         <div className="flex justify-between items-start pb-6 border-b border-gray-700">
           <div>
-            <h1 className="text-white text-3xl font-bold mb-2">{equipment.name}</h1>
+            <h1 className="text-white text-2xl font-bold mb-2">{equipment.name}</h1>
             <StatusBadge status={equipment.status} />
           </div>
           
@@ -203,6 +204,20 @@ function EquipmentDetails() {
               <p className="text-gray-300 leading-relaxed">{equipment.description}</p>
             </div>
           )}
+
+          {/* Work Orders Section */}
+          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 md:col-span-2">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-white text-xl font-semibold">Work Orders</h2>
+              <Link
+                to={`/work-orders/new?equipmentId=${equipment.id}`}
+                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
+              >
+                <span>+ Create Work Order</span>
+              </Link>
+            </div>
+            <WorkOrderTable equipmentId={Number(id)} small />
+          </div>
         </div>
       </div>
 

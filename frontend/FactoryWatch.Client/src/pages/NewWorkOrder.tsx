@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { FaChevronRight } from 'react-icons/fa'
+import { FaChevronRight, FaInfoCircle, FaCheckCircle } from 'react-icons/fa'
 import { API_BASE_URL } from '../utils/api'
 import type { Equipment } from '../types/Equipment'
 
@@ -97,7 +97,7 @@ function NewWorkOrder() {
   return (
     <div className="flex flex-col p-6">
       {/* Breadcrumb */}
-      <div className="flex items-center text-sm text-gray-300 mb-4">
+      <div className="flex items-center text-sm text-gray-300 mb-1">
         <Link to="/work-orders" className="hover:text-white hover:underline cursor-pointer">
           Work Orders
         </Link>
@@ -110,125 +110,206 @@ function NewWorkOrder() {
         <h1 className="text-white text-2xl font-bold">Create New Work Order</h1>
       </div>
 
-      {/* Form Card */}
-      <div className="bg-gray-800 rounded-lg border border-gray-600 p-6 max-w-2xl">
-        {error && (
-          <div className="mb-4 p-3 bg-red-900 border border-red-700 rounded text-red-200">
-            {error}
+      {/* Two Column Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Left Column - Form */}
+        <div className="bg-gray-800 rounded-lg border border-gray-600 p-6">
+          {error && (
+            <div className="mb-4 p-3 bg-red-900 border border-red-700 rounded text-red-200">
+              {error}
+            </div>
+          )}
+
+          {loadingEquipment ? (
+            <div className="text-center text-gray-400 py-8">Loading equipment...</div>
+          ) : equipmentList.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-gray-400 mb-4">No equipment available. Create equipment first.</p>
+              <Link 
+                to="/equipment/new"
+                className="text-blue-400 hover:text-blue-300 underline"
+              >
+                Create Equipment
+              </Link>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Equipment Selection */}
+              <div>
+                <label htmlFor="equipmentId" className="block text-sm font-medium text-gray-300 mb-2">
+                  Equipment <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="equipmentId"
+                  name="equipmentId"
+                  value={formData.equipmentId}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">Select equipment...</option>
+                  {equipmentList.map(equipment => (
+                    <option key={equipment.id} value={equipment.id}>
+                      {equipment.name} - {equipment.location}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Title Field */}
+              <div>
+                <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-2">
+                  Title <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  required
+                  maxLength={200}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="e.g., Belt slipping under load"
+                />
+              </div>
+
+              {/* Assigned To Field */}
+              <div>
+                <label htmlFor="assignedTo" className="block text-sm font-medium text-gray-300 mb-2">
+                  Assigned To
+                </label>
+                <input
+                  type="text"
+                  id="assignedTo"
+                  name="assignedTo"
+                  value={formData.assignedTo}
+                  onChange={handleInputChange}
+                  maxLength={100}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Enter technician name (optional)"
+                />
+              </div>
+
+              {/* Description Field */}
+              <div>
+                <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-2">
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  rows={6}
+                  maxLength={1000}
+                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  placeholder="Describe the issue or maintenance needed (optional)"
+                />
+                <p className="mt-1 text-sm text-gray-400">
+                  {formData.description.length}/1000 characters
+                </p>
+              </div>
+
+              {/* Form Actions */}
+              <div className="flex justify-end gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  disabled={loading}
+                  className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {loading ? 'Creating...' : 'Create Work Order'}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+
+        {/* Right Column - Instructions */}
+        <div className="bg-gray-800 rounded-lg border border-gray-600 p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <FaInfoCircle className="text-blue-400" size={20} />
+            <h2 className="text-white text-xl font-semibold">Work Order Guidelines</h2>
           </div>
-        )}
 
-        {loadingEquipment ? (
-          <div className="text-center text-gray-400 py-8">Loading equipment...</div>
-        ) : equipmentList.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-gray-400 mb-4">No equipment available. Create equipment first.</p>
-            <Link 
-              to="/equipment/new"
-              className="text-blue-400 hover:text-blue-300 underline"
-            >
-              Create Equipment
-            </Link>
+          <div className="space-y-6 text-gray-300">
+            {/* Best Practices Section */}
+            <div>
+              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                <FaCheckCircle className="text-green-400" size={16} />
+                Best Practices
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>Be specific in your title:</strong> Include the equipment issue or maintenance type (e.g., "Hydraulic leak on Press 3" not just "Press issue")</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>Select the correct equipment:</strong> Double-check you're creating the work order for the right machine</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>Assign immediately if possible:</strong> Assigning a technician speeds up response time</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Description Guidelines */}
+            <div>
+              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                <FaCheckCircle className="text-green-400" size={16} />
+                Description Guidelines
+              </h3>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>What happened?</strong> Describe the problem or maintenance need</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>When did it start?</strong> Include timing if relevant</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>Any error codes?</strong> Include diagnostic information</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">•</span>
+                  <span><strong>Safety concerns?</strong> Note any immediate hazards</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Examples Section */}
+            <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
+              <h3 className="text-white font-semibold mb-3 text-sm">Good Example:</h3>
+              <div className="text-sm space-y-2">
+                <p><strong className="text-blue-400">Title:</strong> Belt slipping on Conveyor A1 under load</p>
+                <p><strong className="text-blue-400">Description:</strong> Belt started slipping yesterday afternoon when running at full capacity. No visible damage, likely needs tension adjustment. Operations team reduced speed to 75% as temporary fix.</p>
+                <p><strong className="text-blue-400">Assigned:</strong> John Smith</p>
+              </div>
+            </div>
+
+            {/* Next Steps */}
+            <div className="bg-blue-900/20 border border-blue-700 rounded-lg p-4">
+              <h3 className="text-blue-400 font-semibold mb-2 text-sm">After Submission</h3>
+              <ul className="space-y-1 text-sm">
+                <li>✓ Work order will appear in the dashboard</li>
+                <li>✓ Assigned technician receives notification</li>
+                <li>✓ Equipment maintenance dates update upon completion</li>
+              </ul>
+            </div>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Equipment Selection */}
-            <div>
-              <label htmlFor="equipmentId" className="block text-sm font-medium text-gray-300 mb-2">
-                Equipment <span className="text-red-500">*</span>
-              </label>
-              <select
-                id="equipmentId"
-                name="equipmentId"
-                value={formData.equipmentId}
-                onChange={handleInputChange}
-                required
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="">Select equipment...</option>
-                {equipmentList.map(equipment => (
-                  <option key={equipment.id} value={equipment.id}>
-                    {equipment.name} - {equipment.location}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Title Field */}
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-300 mb-2">
-                Title <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="title"
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-                required
-                maxLength={200}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="e.g., Belt slipping under load"
-              />
-            </div>
-
-            {/* Assigned To Field */}
-            <div>
-              <label htmlFor="assignedTo" className="block text-sm font-medium text-gray-300 mb-2">
-                Assigned To
-              </label>
-              <input
-                type="text"
-                id="assignedTo"
-                name="assignedTo"
-                value={formData.assignedTo}
-                onChange={handleInputChange}
-                maxLength={100}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter technician name (optional)"
-              />
-            </div>
-
-            {/* Description Field */}
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-2">
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                rows={6}
-                maxLength={1000}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                placeholder="Describe the issue or maintenance needed (optional)"
-              />
-              <p className="mt-1 text-sm text-gray-400">
-                {formData.description.length}/1000 characters
-              </p>
-            </div>
-
-            {/* Form Actions */}
-            <div className="flex justify-end gap-3 pt-4">
-              <button
-                type="button"
-                onClick={handleCancel}
-                disabled={loading}
-                className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={loading}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {loading ? 'Creating...' : 'Create Work Order'}
-              </button>
-            </div>
-          </form>
-        )}
+        </div>
       </div>
     </div>
   )

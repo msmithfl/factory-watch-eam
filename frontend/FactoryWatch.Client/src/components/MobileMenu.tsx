@@ -1,9 +1,9 @@
-import { Link, useLocation } from 'react-router-dom'
-import { MdDashboard, MdClose } from 'react-icons/md'
-import { BsClipboardCheck } from 'react-icons/bs'
-import { TbForklift } from "react-icons/tb";
-import { CgProfile } from "react-icons/cg"
+import { useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { MdClose } from 'react-icons/md'
+import { CgProfile } from "react-icons/cg"
+import { navItems } from '../config/navigation'
+import NavLink from './NavLink';
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -13,8 +13,6 @@ interface MobileMenuProps {
 function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const location = useLocation()
   const prevPathname = useRef(location.pathname)
-  
-  const isActive = (path: string) => location.pathname === path
 
   // Close menu when route changes (but not on initial mount)
   useEffect(() => {
@@ -22,7 +20,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       onClose()
     }
     prevPathname.current = location.pathname
-  }, [location.pathname, isOpen]) // Remove onClose from dependencies
+  }, [location.pathname, isOpen, onClose])
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -69,47 +67,15 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         {/* Navigation Links */}
         <nav className="p-4">
           <ul className="space-y-2 text-white">
-            <li>
-              <Link 
-                to="/"
-                className={`flex items-center gap-3 py-3 px-3 rounded cursor-pointer transition-colors ${
-                  isActive('/dashboard') || isActive('/') 
-                    ? 'bg-gray-600 text-white' 
-                    : 'hover:bg-gray-700'
-                }`}
-              >
-                <MdDashboard size={20} />
-                <span>Dashboard</span>
-              </Link>
-            </li>
-            
-            <li>
-              <Link 
-                to="/equipment"
-                className={`flex items-center gap-3 py-3 px-3 rounded cursor-pointer transition-colors ${
-                  isActive('/equipment') 
-                    ? 'bg-gray-600 text-white' 
-                    : 'hover:bg-gray-700'
-                }`}
-              >
-                <TbForklift size={25} />
-                <span>Equipment</span>
-              </Link>
-            </li>
-            
-            <li>
-              <Link 
-                to="/work-orders"
-                className={`flex items-center gap-3 py-3 px-3 rounded cursor-pointer transition-colors ${
-                  isActive('/work-orders') 
-                    ? 'bg-gray-600 text-white' 
-                    : 'hover:bg-gray-700'
-                }`}
-              >
-                <BsClipboardCheck size={20} />
-                <span>Work Orders</span>
-              </Link>
-            </li>
+            {navItems.map((item) => (
+              <NavLink 
+                key={item.to}
+                to={item.to}
+                icon={item.icon}
+                label={item.label}
+                iconSize={item.iconSize}
+              />
+            ))}
           </ul>
         </nav>
       </div>

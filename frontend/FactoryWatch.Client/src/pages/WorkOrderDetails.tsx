@@ -1,4 +1,4 @@
-import { FaChevronRight, FaEdit, FaTrash, FaArrowLeft, FaCheckCircle, FaCog } from "react-icons/fa";
+import { FaChevronRight, FaEdit, FaTrash, FaCheckCircle, FaCog } from "react-icons/fa";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../utils/api";
@@ -119,7 +119,7 @@ export default function WorkOrderDetails() {
 
   return (
     <>
-      <div className="flex flex-col p-6 max-w-5xl mx-auto">
+      <div className="flex flex-col p-6 mx-auto">
         {/* Breadcrumb */}
         <div className="flex items-center text-sm text-gray-300 mb-4">
           <Link to="/work-orders" className="hover:text-white hover:underline cursor-pointer">
@@ -130,13 +130,13 @@ export default function WorkOrderDetails() {
         </div>
 
         {/* Back Button */}
-        <button
+        {/* <button
           onClick={() => navigate('/work-orders')}
           className="flex items-center gap-2 text-gray-300 hover:text-white mb-4 transition-colors"
         >
           <FaArrowLeft size={14} />
           <span>Back to Work Orders</span>
-        </button>
+        </button> */}
 
         {/* Page Header */}
         <div className="flex justify-between items-start pb-6 border-b border-gray-700">

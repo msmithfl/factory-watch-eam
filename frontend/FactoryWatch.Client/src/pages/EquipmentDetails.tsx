@@ -1,4 +1,4 @@
-import { FaChevronRight, FaEdit, FaTrash, FaArrowLeft } from "react-icons/fa";
+import { FaChevronRight, FaEdit, FaTrash} from "react-icons/fa";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../utils/api";

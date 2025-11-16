@@ -5,7 +5,7 @@ import WorkOrderTable from "../components/WorkOrderTable";
 function WorkOrders() {
   return (
     <div className="flex flex-col p-6">
-      <div className="text-white text-sm mb-2">
+      <div className="text-white text-sm">
         <p>Work Orders</p>
       </div>
       
@@ -17,7 +17,7 @@ function WorkOrders() {
           className="flex items-center gap-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
         >
           <FaPlus size={15} />
-          Create Work Order
+          Create
         </Link>
       </div>
       

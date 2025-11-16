@@ -5,6 +5,7 @@ import { API_BASE_URL } from "../utils/api";
 import type { Equipment } from "../types/Equipment";
 import { StatusBadge } from "../components/StatusBadge";
 import ConfirmDialog from "../components/ConfirmDialog";
+import WorkOrderTable from "../components/WorkOrderTable";
 
 function EquipmentDetails() {
   const { id } = useParams<{ id: string }>()
@@ -203,6 +204,20 @@ function EquipmentDetails() {
               <p className="text-gray-300 leading-relaxed">{equipment.description}</p>
             </div>
           )}
+
+          {/* Work Orders Section */}
+          <div className="bg-gray-800 rounded-lg p-6 border border-gray-700 md:col-span-2">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-white text-xl font-semibold">Work Orders</h2>
+              <Link
+                to={`/work-orders/new?equipmentId=${equipment.id}`}
+                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded text-sm transition-colors"
+              >
+                <span>+ Create Work Order</span>
+              </Link>
+            </div>
+            <WorkOrderTable equipmentId={Number(id)} small />
+          </div>
         </div>
       </div>
 
